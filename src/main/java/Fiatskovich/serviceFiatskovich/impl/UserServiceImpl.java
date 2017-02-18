@@ -1,8 +1,9 @@
-package Fiatskovich.serviceFiatskovich;
+package Fiatskovich.serviceFiatskovich.impl;
 
 import Fiatskovich.daoFiatskovich.RoleDao;
 import Fiatskovich.daoFiatskovich.UserDao;
 import Fiatskovich.modelFiatskovich.Role;
+import Fiatskovich.serviceFiatskovich.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,7 +16,7 @@ import java.util.Set;
  * Created by Евгений on 17.02.2017.
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;

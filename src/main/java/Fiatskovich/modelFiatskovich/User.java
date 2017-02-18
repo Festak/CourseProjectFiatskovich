@@ -29,6 +29,21 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    @ManyToMany
+    @JoinTable(name = "user_medals",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "medal_id"))
+    private Set<Medal> medals;
+
+
+    public Set<Medal> getMedals() {
+        return medals;
+    }
+
+    public void setMedals(Set<Medal> medals) {
+        this.medals = medals;
+    }
+
     public Long getId() {
         return id;
     }

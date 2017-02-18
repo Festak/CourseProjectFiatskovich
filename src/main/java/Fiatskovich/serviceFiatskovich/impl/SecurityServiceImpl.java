@@ -1,9 +1,10 @@
-package Fiatskovich.serviceFiatskovich;
+package Fiatskovich.serviceFiatskovich.impl;
 
 /**
  * Created by Евгений on 17.02.2017.
  */
 
+import Fiatskovich.serviceFiatskovich.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

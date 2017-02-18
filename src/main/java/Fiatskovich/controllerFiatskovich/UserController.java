@@ -11,6 +11,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Евгений on 17.02.2017.
@@ -67,5 +70,12 @@ public class UserController {
     public String admin(Model model) {
         return "/admin";
     }
+
+    @RequestMapping(value = "/labseven", method = RequestMethod.GET)
+    public String labseven(Model model) {
+        return "/labseven";
+    }
+
+
 
 }

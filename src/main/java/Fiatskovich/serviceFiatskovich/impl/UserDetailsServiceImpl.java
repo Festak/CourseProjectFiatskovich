@@ -1,4 +1,4 @@
-package Fiatskovich.serviceFiatskovich;
+package Fiatskovich.serviceFiatskovich.impl;
 
 import Fiatskovich.daoFiatskovich.UserDao;
 import Fiatskovich.modelFiatskovich.Role;

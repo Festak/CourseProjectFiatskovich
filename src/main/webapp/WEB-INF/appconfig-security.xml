@@ -25,7 +25,10 @@
     </authentication-manager>
 
     <beans:bean id="userDetailsServiceImpl"
-                class="Fiatskovich.serviceFiatskovich.UserDetailsServiceImpl"></beans:bean>
+                class="Fiatskovich.serviceFiatskovich.impl.UserDetailsServiceImpl"></beans:bean>
+
+    <beans:bean id="medalService" class="Fiatskovich.serviceFiatskovich.impl.MedalServiceImpl"></beans:bean>
+    <beans:bean id="medalDao" class="Fiatskovich.daoFiatskovich.impl.MedalDaoImpl"></beans:bean>
 
     <beans:bean id="encoder"
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
