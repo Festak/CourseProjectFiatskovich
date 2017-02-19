@@ -17,8 +17,17 @@ public class User {
     @Column(name = "username")
     private String username;
 
+  //  @OneToMany(mappedBy="users")
+  //  private Set<Report> reports;
+
     @Column(name = "password")
     private String password;
+
+    @Column(name="secondAdres")
+    private String secondAdres;
+
+    @Column(name="credit")
+    private int credit;
 
     @Transient
     private String confirmPassword;
@@ -83,4 +92,24 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public String getSecondAdres() {
+        return secondAdres;
+    }
+
+    public void setSecondAdres(String secondAdres) {
+        this.secondAdres = secondAdres;
+    }
+
+    public int getCredit() {
+        return credit;
+    }
+
+    public void setCredit(int credit) {
+        this.credit = credit;
+    }
+
+
+
+
 }

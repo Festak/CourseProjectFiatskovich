@@ -61,7 +61,7 @@ public class UserController {
         return "/login";
     }
 
-    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model) {
         return "/welcome";
     }
@@ -76,6 +76,19 @@ public class UserController {
         return "/labseven";
     }
 
-
+    @RequestMapping(value = "/labsevengo", method = RequestMethod.POST)
+    public String labsevengo(Model model, HttpServletRequest req) {
+        try {
+            Long id = Long.parseLong(req.getParameter("userid"));
+            req.getParameter("userid");
+            User user = userService.findByUserid(id);
+            model.addAttribute("user", user);
+        }
+        catch(Exception e){
+            User user = new User();
+            model.addAttribute("user", user);
+        }
+        return "/labsevengo";
+    }
 
 }

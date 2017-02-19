@@ -48,6 +48,8 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.2.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.2.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.2.0.RELEASE" />
+          <element id="library" level="project" name="Maven: com.sun.faces:jsf-api:2.1.13" />
+          <element id="library" level="project" name="Maven: com.sun.faces:jsf-impl:2.1.13" />
           <element id="library" level="project" name="Maven: cglib:cglib-nodep:2.2.2" />
         </element>
       </element>

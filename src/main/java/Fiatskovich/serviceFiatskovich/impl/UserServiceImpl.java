@@ -40,4 +40,9 @@ public class UserServiceImpl implements UserService {
     public Fiatskovich.modelFiatskovich.User findByUsername(String username) {
         return userDao.findByUsername(username);
     }
+
+    @Override
+    public Fiatskovich.modelFiatskovich.User findByUserid(long id) {
+        return userDao.findOne(id);
+    }
 }

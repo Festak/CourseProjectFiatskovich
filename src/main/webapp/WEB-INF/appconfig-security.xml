@@ -8,7 +8,6 @@
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http auto-config="true">
-        <intercept-url pattern="/" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
 
@@ -26,9 +25,6 @@
 
     <beans:bean id="userDetailsServiceImpl"
                 class="Fiatskovich.serviceFiatskovich.impl.UserDetailsServiceImpl"></beans:bean>
-
-    <beans:bean id="medalService" class="Fiatskovich.serviceFiatskovich.impl.MedalServiceImpl"></beans:bean>
-    <beans:bean id="medalDao" class="Fiatskovich.daoFiatskovich.impl.MedalDaoImpl"></beans:bean>
 
     <beans:bean id="encoder"
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
