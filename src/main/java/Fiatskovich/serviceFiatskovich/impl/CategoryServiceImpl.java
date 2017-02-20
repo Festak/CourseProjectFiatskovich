@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by Евгений on 20.02.2017.
@@ -23,7 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional
     public Set<CategoryViewModel> getAllCategoriesViewModel() {
-        Set<Category> set = new HashSet<Category>(categoryDao.findAll());
+        Set<Category> set = new LinkedHashSet<Category>(categoryDao.findAll());
         return categoryToCategoryViewModelCollection(set);
     }
 
@@ -35,7 +37,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     private Set<CategoryViewModel> categoryToCategoryViewModelCollection(Set<Category> categoriesTemp){
-        Set<CategoryViewModel> viewModels = new HashSet<CategoryViewModel>();
+        Set<CategoryViewModel> viewModels = new LinkedHashSet<CategoryViewModel>();
         for(Category category: categoriesTemp){
             viewModels.add(categoryToCategoryViewModel(category));
         }

@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-md-2">
             <c:forEach var="categories" items="${categories}">
-                <a href="#">${categories.name}</a><br>
+                <a href="/index/${categories.id}">${categories.name}</a><br>
             </c:forEach>
         </div>
         <div class="col-md-10">
@@ -23,6 +23,7 @@
                 <c:forEach var="products" items="${products}">
                 <div class="col-md-6">
             Name: ${products.name}<br>
+                    <img src="${products.imageUrl}" style="width: 50px; height: 50px;"/>
             Advantages:<br>
             <c:forEach var="advantage" items="${products.advantages}">
                 advantage: ${advantage.description}<br>
@@ -35,6 +36,8 @@
     </div>
 
 </div>
+
+
 
 <jsp:include page="templates/scripts.jsp"/>
 

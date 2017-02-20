@@ -13,4 +13,6 @@ public interface ProductService {
     Set<Product> listProducts();
     ProductViewModel productToProductViewModelById(Long id);
     Set<ProductViewModel> getAllProducts();
+    Set<ProductViewModel> getAllProductsByCategoryId(int id);
+    ProductViewModel getProductByProductName(String name);
 }

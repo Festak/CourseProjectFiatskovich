@@ -90,6 +90,8 @@ public class UserController {
         }
         catch(Exception e){
             User user = new User();
+            user.setSecondAdres("Неверный id!");
+            user.setCredit(0);
             model.addAttribute("user", user);
         }
         return "/labsevengo";

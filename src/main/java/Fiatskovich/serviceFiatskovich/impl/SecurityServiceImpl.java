@@ -15,14 +15,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-/**
- * Implementation of {@link SecurityService} interface.
- */
 
 @Service
 public class SecurityServiceImpl implements SecurityService {
 
-    private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -50,8 +46,6 @@ public class SecurityServiceImpl implements SecurityService {
 
         if (authenticationToken.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-
-            logger.debug(String.format("Successfully %s auto logged in", username));
         }
     }
 }

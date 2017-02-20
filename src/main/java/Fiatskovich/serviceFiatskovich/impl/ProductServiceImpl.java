@@ -1,5 +1,6 @@
 package Fiatskovich.serviceFiatskovich.impl;
 
+import Fiatskovich.daoFiatskovich.CategoryDao;
 import Fiatskovich.daoFiatskovich.ProductDao;
 import Fiatskovich.modelFiatskovich.Advantage;
 import Fiatskovich.modelFiatskovich.Category;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.LinkedHashSet;
 import java.util.concurrent.CancellationException;
 
 /**
@@ -26,6 +28,9 @@ public class ProductServiceImpl implements ProductService{
     @Autowired
     private ProductDao productDao;
 
+    @Autowired
+    private CategoryDao categoryDao;
+
     @Override
     @Transactional
     public Product findProductById(Long id) {
@@ -34,7 +39,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Set<Product> listProducts() {
-        Set<Product> set = new HashSet<Product>(productDao.findAll());
+        Set<Product> set = new LinkedHashSet<Product>(productDao.findAll());
         return set;
     }
 
@@ -52,13 +57,41 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Set<ProductViewModel> getAllProducts() {
-        Set<Product> products = new HashSet<Product>(productDao.findAll());
-        Set<ProductViewModel> models = new HashSet<ProductViewModel>();
+        Set<Product> products = new LinkedHashSet<Product>(productDao.findAll());
+        Set<ProductViewModel> models = new LinkedHashSet<ProductViewModel>();
         for(Product product: products){
             ProductViewModel temp = productToProductViewModel(product);
             models.add(temp);
         }
         return models;
+    }
+
+    @Override
+    @Transactional
+    public Set<ProductViewModel> getAllProductsByCategoryId(int id) {
+    Category category = categoryDao.findOne(id);
+        Set<Product> products = new LinkedHashSet<Product>(productDao.findAll());
+        Set<ProductViewModel> productsViewModel = new LinkedHashSet<ProductViewModel>();
+        for(Product product: products){
+            if(product.getCategories().contains(category)){
+              productsViewModel.add(productToProductViewModel(product));
+            }
+
+        }
+        return productsViewModel;
+
+    }
+    @Transactional
+    @Override
+    public ProductViewModel getProductByProductName(String name) {
+        Product product = new Product();
+        List<Product> products = productDao.findAll();
+        for(Product prod: products){
+            if(prod.getName().equals(name)){
+                product = prod;
+            }
+        }
+        return productToProductViewModel(product);
     }
 
     private ProductViewModel productToProductViewModel(Product product) {
@@ -71,7 +104,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     private Set<AdvantageViewModel> initAdvantagesViewModel(Set<Advantage> advantages){
-        Set<AdvantageViewModel> model = new HashSet<AdvantageViewModel>();
+        Set<AdvantageViewModel> model = new LinkedHashSet<AdvantageViewModel>();
         for (Advantage advantage: advantages) {
             model.add(new AdvantageViewModel(advantage.getId(),advantage.getDescription()));
         }
@@ -79,7 +112,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     private Set<CategoryViewModel> initCategoriesViewModel(Set<Category> categories){
-        Set<CategoryViewModel> model = new HashSet<CategoryViewModel>();
+        Set<CategoryViewModel> model = new LinkedHashSet<CategoryViewModel>();
         for (Category category: categories) {
             model.add(new CategoryViewModel(category.getId(),category.getName()));
         }
