@@ -1,8 +1,5 @@
-package Fiatskovich.modelFiatskovich;
+package Fiatskovich.viewmodelFiatskovich;
 
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,51 +7,31 @@ import java.util.Set;
 /**
  * Created by Евгений on 17.02.2017.
  */
-@Entity
-@Table(name = "users")
-public class User implements Serializable {
+public class UserViewModel implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "username")
     private String username;
 
-  //  @OneToMany(mappedBy="users")
-  //  private Set<Report> reports;
-
-    @Column(name = "password")
     private String password;
 
-    @Column(name="secondAdres")
     private String secondAdres;
 
-    @Column(name="credit")
     private int credit;
 
-    @Transient
     private String confirmPassword;
 
-    @ManyToMany
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<Role>();
+    private Set<RoleViewModel> roles = new HashSet<RoleViewModel>();
 
-    @ManyToMany
-    @JoinTable(name = "user_medals",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "medal_id"))
-    private Set<Medal> medals = new HashSet<Medal>();
+    private Set<MedalViewModel> medals = new HashSet<MedalViewModel>();
 
-    public User(){}
+    public UserViewModel(){}
 
-    public Set<Medal> getMedals() {
+    public Set<MedalViewModel> getMedals() {
         return medals;
     }
 
-    public void setMedals(Set<Medal> medals) {
+    public void setMedals(Set<MedalViewModel> medals) {
         this.medals = medals;
     }
 
@@ -90,11 +67,11 @@ public class User implements Serializable {
         this.confirmPassword = confirmPassword;
     }
 
-    public Set<Role> getRoles() {
+    public Set<RoleViewModel> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<RoleViewModel> roles) {
         this.roles = roles;
     }
 

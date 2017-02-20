@@ -1,6 +1,8 @@
 package Fiatskovich.modelFiatskovich;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -8,7 +10,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name="roles")
-public class Role {
+public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,7 +19,7 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    private Set<User> users = new HashSet<User>();
 
 
     public Role() {
@@ -50,7 +52,7 @@ public class Role {
 
     @Override
     public String toString() {
-        return "Role{" +
+        return "RoleViewModel{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", users=" + users +

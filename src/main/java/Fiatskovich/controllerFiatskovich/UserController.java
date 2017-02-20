@@ -1,5 +1,6 @@
 package Fiatskovich.controllerFiatskovich;
 
+import Fiatskovich.daoFiatskovich.UserDao;
 import Fiatskovich.modelFiatskovich.User;
 import Fiatskovich.serviceFiatskovich.SecurityService;
 import Fiatskovich.serviceFiatskovich.UserService;
@@ -28,6 +29,9 @@ public class UserController {
 
     @Autowired
     private UserValidator userValidator;
+
+    @Autowired
+    private UserDao userDao;
 
     @RequestMapping(value="/registration", method = RequestMethod.GET)
     public String register(Model model){

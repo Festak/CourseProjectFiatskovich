@@ -3,11 +3,12 @@ package Fiatskovich.serviceFiatskovich.impl;
 import Fiatskovich.daoFiatskovich.RoleDao;
 import Fiatskovich.daoFiatskovich.UserDao;
 import Fiatskovich.modelFiatskovich.Role;
+import Fiatskovich.modelFiatskovich.User;
 import Fiatskovich.serviceFiatskovich.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,13 +37,13 @@ public class UserServiceImpl implements UserService {
         userDao.save(user);
     }
 
-    @Override
-    public Fiatskovich.modelFiatskovich.User findByUsername(String username) {
+    @Transactional
+    public User findByUsername(String username) {
         return userDao.findByUsername(username);
     }
 
-    @Override
-    public Fiatskovich.modelFiatskovich.User findByUserid(long id) {
+    @Transactional
+    public User findByUserid(long id) {
         return userDao.findOne(id);
     }
 }

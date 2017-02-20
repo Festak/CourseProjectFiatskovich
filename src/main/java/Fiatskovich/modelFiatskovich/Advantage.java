@@ -1,6 +1,8 @@
 package Fiatskovich.modelFiatskovich;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -8,7 +10,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name="advantages")
-public class Advantage {
+public class Advantage implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -17,7 +19,7 @@ public class Advantage {
     private String description;
 
     @ManyToMany(mappedBy = "advantages")
-    private Set<Product> products;
+    private Set<Product> products = new HashSet<Product>();
 
     public Advantage(){}
 

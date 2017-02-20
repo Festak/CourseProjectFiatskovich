@@ -1,4 +1,4 @@
-package Fiatskovich.modelFiatskovich;
+package Fiatskovich.viewmodelFiatskovich;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,25 +8,18 @@ import java.util.Set;
 /**
  * Created by Евгений on 18.02.2017.
  */
-@Entity
-@Table(name="medals")
-public class Medal implements Serializable {
 
-    @Id
-    @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class MedalViewModel implements Serializable {
+
+
  private int id;
 
-    @Column(name="name")
     private String name;
 
-    @Column(name="description")
     private String description;
 
-    @ManyToMany(mappedBy = "medals")
-    private Set<User> users = new HashSet<User>();
 
-    public Medal() {
+    public MedalViewModel() {
     }
 
     public int getId() {
@@ -53,11 +46,5 @@ public class Medal implements Serializable {
         this.description = description;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
 }

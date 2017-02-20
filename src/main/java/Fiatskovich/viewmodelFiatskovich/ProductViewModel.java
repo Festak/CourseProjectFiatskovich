@@ -1,6 +1,5 @@
-package Fiatskovich.modelFiatskovich;
+package Fiatskovich.viewmodelFiatskovich;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,47 +7,29 @@ import java.util.Set;
 /**
  * Created by Евгений on 19.02.2017.
  */
-@Entity
-@Table(name="products")
-public class Product implements Serializable {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class ProductViewModel implements Serializable {
+
     private Long id;
 
-    @Column(name = "name")
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "product_categories",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories = new HashSet<Category>();
+    private Set<CategoryViewModel> categories = new HashSet<CategoryViewModel>();
 
-    @ManyToMany
-    @JoinTable(name = "product_advantages",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "advantage_id"))
-    private Set<Advantage> advantages = new HashSet<Advantage>();
+    private Set<AdvantageViewModel> advantages = new HashSet<AdvantageViewModel>();
 
-    @Column(name="weight")
     private int weight;
 
-    @Column(name="temperature")
     private String temperature;
 
-    @Column(name="memory")
     private int memory;
 
-    @Column(name="price")
     private double price;
 
-    @Column(name = "image_url")
     private String imageUrl;
 
 
-    public Product(){}
+    public ProductViewModel(){}
 
     public Long getId() {
         return id;
@@ -66,7 +47,7 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public Set<Category> getCategories() {
+    public Set<CategoryViewModel> getCategories() {
         return categories;
     }
 
@@ -78,15 +59,15 @@ public class Product implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public void setCategories(Set<Category> categories) {
+    public void setCategories(Set<CategoryViewModel> categories) {
         this.categories = categories;
     }
 
-    public Set<Advantage> getAdvantages() {
+    public Set<AdvantageViewModel> getAdvantages() {
         return advantages;
     }
 
-    public void setAdvantages(Set<Advantage> advantages) {
+    public void setAdvantages(Set<AdvantageViewModel> advantages) {
         this.advantages = advantages;
     }
 
