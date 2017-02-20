@@ -13,6 +13,7 @@ public class CategoryViewModel implements Serializable {
 
     private int id;
     private String name;
+
     public CategoryViewModel(int id, String name) {
         this.id = id;
         this.name = name;

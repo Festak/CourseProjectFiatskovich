@@ -29,6 +29,16 @@ public class ProductViewModel implements Serializable {
     private String imageUrl;
 
 
+    public ProductViewModel(Long id, String name, int weight, String temperature, int memory, double price, String imageUrl) {
+        this.id = id;
+        this.name = name;
+        this.weight = weight;
+        this.temperature = temperature;
+        this.memory = memory;
+        this.price = price;
+        this.imageUrl = imageUrl;
+    }
+
     public ProductViewModel(){}
 
     public Long getId() {
