@@ -11,6 +11,8 @@
     <title>Title</title>
 </head>
 <body>
+<jsp:include page="../../views/templates/navbar.jsp"/>
 
+<jsp:include page="../../views/templates/scripts.jsp"/>
 </body>
 </html>

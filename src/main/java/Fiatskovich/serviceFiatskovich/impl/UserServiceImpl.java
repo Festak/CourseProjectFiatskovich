@@ -1,5 +1,6 @@
 package Fiatskovich.serviceFiatskovich.impl;
 
+import Fiatskovich.cartFiatskovich.Utils;
 import Fiatskovich.daoFiatskovich.RoleDao;
 import Fiatskovich.daoFiatskovich.UserDao;
 import Fiatskovich.modelFiatskovich.Medal;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -64,6 +66,11 @@ public class UserServiceImpl implements UserService {
             models.add(temp);
         }
         return models;
+    }
+
+    @Override
+    public void buyProducts(HttpServletRequest req) {
+        Utils.removeCartInSession(req);
     }
 
     private UserViewModel userToUserViewModel(User user){

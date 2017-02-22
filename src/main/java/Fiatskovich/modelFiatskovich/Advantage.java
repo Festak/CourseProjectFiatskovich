@@ -18,7 +18,7 @@ public class Advantage implements Serializable{
     @Column(name = "description")
     private String description;
 
-    @ManyToMany(mappedBy = "advantages")
+    @ManyToMany(mappedBy = "advantages", cascade = CascadeType.ALL)
     private Set<Product> products = new HashSet<Product>();
 
     public Advantage(){}

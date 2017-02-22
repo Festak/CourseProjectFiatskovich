@@ -2,10 +2,7 @@ package Fiatskovich.modelFiatskovich;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Евгений on 19.02.2017.
@@ -23,23 +20,23 @@ public class Product implements Serializable {
     private String name;
 
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "product_categories",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories = new HashSet<Category>();
+    private Set<Category> categories = new LinkedHashSet<Category>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "product_ratings",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "rating_id"))
     private List<Rating> ratings = new LinkedList<Rating>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "product_advantages",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "advantage_id"))
-    private Set<Advantage> advantages = new HashSet<Advantage>();
+    private Set<Advantage> advantages = new LinkedHashSet<Advantage>();
 
     @Column(name="weight")
     private int weight;
@@ -57,7 +54,17 @@ public class Product implements Serializable {
     private String imageUrl;
 
 
+
     public Product(){}
+
+    public Product(String name, int weight, String temperature, int memory, double price, String imageUrl) {
+        this.name = name;
+        this.weight = weight;
+        this.temperature = temperature;
+        this.memory = memory;
+        this.price = price;
+        this.imageUrl = imageUrl;
+    }
 
     public Long getId() {
         return id;

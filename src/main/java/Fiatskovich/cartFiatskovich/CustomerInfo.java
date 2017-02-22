@@ -8,9 +8,10 @@ public class CustomerInfo implements Serializable {
     private String address;
     private String email;
     private String phone;
-
     private boolean valid;
 
+
+    public CustomerInfo(){}
 
     public String getName() {
         return name;

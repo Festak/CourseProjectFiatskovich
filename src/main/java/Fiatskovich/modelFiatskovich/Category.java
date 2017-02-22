@@ -19,7 +19,7 @@ public class Category implements Serializable {
     @Column(name="name")
     private String name;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "categories", cascade = CascadeType.ALL)
     private Set<Product> products = new HashSet<Product>();
 
     public Category(int id, String name, Set<Product> products) {

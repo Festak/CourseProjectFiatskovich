@@ -3,6 +3,7 @@ package Fiatskovich.serviceFiatskovich;
 import Fiatskovich.modelFiatskovich.User;
 import Fiatskovich.viewmodelFiatskovich.UserViewModel;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Set;
 
 /**
@@ -16,4 +17,6 @@ public interface UserService {
     User findByUserid(long id);
 
     Set<UserViewModel> findAllViewModelUsers();
+
+    void buyProducts(HttpServletRequest request);
 }

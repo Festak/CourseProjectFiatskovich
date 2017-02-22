@@ -13,7 +13,7 @@ Advantages:<br>
 <c:forEach var="advantage" items="${product.advantages}">
     advantage: ${advantage.description}<br>
 </c:forEach>
-
+<a href="/product/addtobasket/${products.id}">Add to basket</a>
 
 <jsp:include page="../../views/templates/scripts.jsp"/>
 </body>

@@ -11,6 +11,7 @@ import java.util.*;
 
 public class ProductViewModel implements Serializable {
 
+
     private Long id;
 
     private String name;
@@ -33,6 +34,9 @@ private List<RatingViewModel> ratings = new LinkedList<RatingViewModel>();
 
     private String imageUrl;
 
+    private AdvantageViewModel advantageViewModel;
+
+    private CategoryViewModel categoryViewModel;
 
 
     public ProductViewModel(Long id, String name, int weight, String temperature, int memory, double price, String imageUrl
@@ -49,6 +53,21 @@ private List<RatingViewModel> ratings = new LinkedList<RatingViewModel>();
 
     public ProductViewModel(){}
 
+    public AdvantageViewModel getAdvantageViewModel() {
+        return advantageViewModel;
+    }
+
+    public void setAdvantageViewModel(AdvantageViewModel advantageViewModel) {
+        this.advantageViewModel = advantageViewModel;
+    }
+
+    public CategoryViewModel getCategoryViewModel() {
+        return categoryViewModel;
+    }
+
+    public void setCategoryViewModel(CategoryViewModel categoryViewModel) {
+        this.categoryViewModel = categoryViewModel;
+    }
 
     public List<RatingViewModel> getRatings() {
         return ratings;

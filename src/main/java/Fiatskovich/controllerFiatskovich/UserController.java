@@ -1,11 +1,16 @@
 package Fiatskovich.controllerFiatskovich;
 
+import Fiatskovich.cartFiatskovich.Utils;
 import Fiatskovich.daoFiatskovich.UserDao;
 import Fiatskovich.helpers.Form;
+import Fiatskovich.modelFiatskovich.Report;
 import Fiatskovich.modelFiatskovich.User;
+import Fiatskovich.serviceFiatskovich.ReportService;
 import Fiatskovich.serviceFiatskovich.SecurityService;
 import Fiatskovich.serviceFiatskovich.UserService;
 import Fiatskovich.validatorFiatskovich.UserValidator;
+import Fiatskovich.viewmodelFiatskovich.ProductViewModel;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 /**
  * Created by Евгений on 17.02.2017.
@@ -30,6 +36,9 @@ public class UserController{
 
     @Autowired
     private UserValidator userValidator;
+
+    @Autowired
+    private ReportService reportService;
 
     @Autowired
     private UserDao userDao;
@@ -78,32 +87,27 @@ public class UserController{
         return "/admin";
     }
 
-    @RequestMapping(value = "/labseven", method = RequestMethod.GET)
-    public String labseven(Model model) {
-        return "/labseven";
-    }
-
-    @RequestMapping(value = "/labsevengo", method = RequestMethod.POST)
-    public String labsevengo(Model model, HttpServletRequest req) {
-        try {
-            Long id = Long.parseLong(req.getParameter("userid"));
-            req.getParameter("userid");
-            User user = userService.findByUserid(id);
-            model.addAttribute("user", user);
-        }
-        catch(Exception e){
-            User user = new User();
-            user.setSecondAdres("Неверный id!");
-            user.setCredit(0);
-            model.addAttribute("user", user);
-        }
-        return "/labsevengo";
-    }
 
     @RequestMapping(value = "/user/userpage")
     public String userpage(Model model){
         model.addAttribute("form", new Form());
         return "/user/userpage";
+    }
+
+    @RequestMapping(value="/user/buy", method = RequestMethod.GET)
+    public String buy(Model model){
+        model.addAttribute("form", new Form());
+        model.addAttribute("report", new Report());
+        return "/user/buy";
+    }
+
+    @RequestMapping(value = "/user/buyall", method = RequestMethod.POST)
+    public String buyAll(@ModelAttribute("report")Report report, HttpServletRequest req){
+        report.setBuyDate(new Date());
+        report.setPrice(Utils.getCartInSession(req).getAmountTotal());
+        userService.buyProducts(req);
+        reportService.makeReport(report);
+        return "redirect:/index";
     }
 
 }

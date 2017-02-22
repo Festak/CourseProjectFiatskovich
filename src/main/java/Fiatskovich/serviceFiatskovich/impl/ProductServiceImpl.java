@@ -32,8 +32,11 @@ public class ProductServiceImpl implements ProductService{
     private CategoryDao categoryDao;
 
     @Override
+    @Transactional
     public void removeProductById(Long id) {
-        productDao.delete(id);
+        Product product = productDao.findOne(id);
+        productDao.delete(product);
+
     }
 
     @Override
@@ -43,6 +46,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
+    @Transactional
     public Set<Product> listProducts() {
         Set<Product> set = new LinkedHashSet<Product>(productDao.findAll());
         return set;
@@ -56,6 +60,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
+    @Transactional
     public Set<ProductViewModel> getAllProducts() {
         Set<Product> products = new LinkedHashSet<Product>(productDao.findAll());
         Set<ProductViewModel> models = new LinkedHashSet<ProductViewModel>();
@@ -92,6 +97,51 @@ public class ProductServiceImpl implements ProductService{
             }
         }
         return model;
+    }
+
+    @Override
+    @Transactional
+    public void addProductViewModelToDataBase(ProductViewModel product) {
+Product productToDatabase = productViewModelToProduct(product);
+        productDao.save(productToDatabase);
+    }
+
+    @Override
+    @Transactional
+    public void editProduct(ProductViewModel product) {
+        Product product1 = productDao.findOne(product.getId());
+        product1.setName(product.getName());
+        product1.setImageUrl(product.getImageUrl());
+        product1.setMemory(product.getMemory());
+        product1.setWeight(product.getWeight());
+        product1.setPrice(product.getPrice());
+        product1.setTemperature(product.getTemperature());
+        productDao.saveAndFlush(product1);
+    }
+
+    private Product productViewModelToProduct(ProductViewModel model){
+        Product product = new Product(model.getName(),model.getWeight(),
+                model.getTemperature(), model.getMemory(), model.getPrice(),model.getImageUrl());
+        Set<Advantage> advantages = new LinkedHashSet<Advantage>();
+        advantages.add(advantageViewModelToAdvantage(model.getAdvantageViewModel()));
+        product.setAdvantages(advantages);
+        Set<Category> categories = new LinkedHashSet<Category>();
+        categories.add(categoryViewModelToCategory(model.getCategoryViewModel()));
+        product.setCategories(categories);
+        product.setRatings(new ArrayList<Rating>());
+        return product;
+    }
+
+    private Category categoryViewModelToCategory(CategoryViewModel model){
+        Category category = new Category();
+        category.setName(model.getName());
+        return category;
+    }
+
+    private Advantage advantageViewModelToAdvantage(AdvantageViewModel model){
+        Advantage advantage = new Advantage();
+        advantage.setDescription(model.getDescription());
+        return advantage;
     }
 
     private ProductViewModel productToProductViewModel(Product product) {

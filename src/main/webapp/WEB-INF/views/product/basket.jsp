@@ -8,8 +8,8 @@
 </head>
 <body>
 <jsp:include page="../../views/templates/navbar.jsp"/>
+<a href="${contextPath}/user/buy">Купить все</a>
 <c:forEach var="products" items="${products}">
-
     <div class="col-md-6">
         Name: ${products.name}<br>
         <img src="${products.imageUrl}" style="width: 50px; height: 50px;"/>

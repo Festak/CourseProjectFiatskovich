@@ -15,7 +15,9 @@
 
 <jsp:include page="../../views/templates/navbar.jsp"/>
 <br>
-<a href="/admin/addProduct">Добавить продукт</a>
+<a href="/admin/report">Reports</a>
+<br>
+<a href="${contextPath}/admin/addProduct">Добавить продукт</a>
 <div class="container">
     <div class="row">
         <div class="col-md-9">
@@ -25,9 +27,11 @@
                         Name: ${products.name}<br>
                         <img src="${products.imageUrl}" style="width: 50px; height: 50px;"/>
                         <a href="/product/details/${products.id}">Details</a>
+                        <a href="/admin/deleteProduct/${products.id}">Delete</a>
+                        <a href="/admin/edit/${products.id}">Edit</a>
                     </div>
                     <br>
-                    <a href="/admin/deleteProduct/${products.id}">Delete</a>
+
                 </c:forEach>
             </div>
         </div>

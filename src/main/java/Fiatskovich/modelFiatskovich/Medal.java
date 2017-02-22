@@ -26,7 +26,7 @@ public class Medal implements Serializable {
     @Column(name="image_url")
     private String imageUrl;
 
-    @ManyToMany(mappedBy = "medals")
+    @ManyToMany(mappedBy = "medals", cascade = CascadeType.ALL)
     private Set<User> users = new HashSet<User>();
 
     public Medal() {

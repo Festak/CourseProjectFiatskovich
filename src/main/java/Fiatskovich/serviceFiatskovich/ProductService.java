@@ -16,5 +16,7 @@ public interface ProductService {
     Set<ProductViewModel> getAllProducts();
     Set<ProductViewModel> getAllProductsByCategoryId(int id);
     Set<ProductViewModel> getProductsByProductName(String name);
+    void addProductViewModelToDataBase(ProductViewModel product);
+    void editProduct(ProductViewModel product);
 
 }

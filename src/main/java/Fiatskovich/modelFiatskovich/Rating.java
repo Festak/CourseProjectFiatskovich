@@ -25,7 +25,7 @@ public class Rating {
     @Column(name="user_id")
     private int userId;
 
-    @ManyToMany(mappedBy = "ratings")
+    @ManyToMany(mappedBy = "ratings", cascade = CascadeType.ALL)
     private List<Product> products = new LinkedList<Product>();
 
 

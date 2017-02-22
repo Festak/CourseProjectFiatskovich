@@ -3,6 +3,7 @@ DROP TABLE user_medals;
 DROP TABLE product_advantages;
 DROP TABLE product_categories;
 DROP TABLE product_ratings;
+DROP TABLE reports;
 DROP TABLE ratings;
 DROP TABLE advantages;
 DROP TABLE categories;
@@ -89,6 +90,16 @@ CREATE TABLE products(
   memory INT,
   price DOUBLE,
   image_url varchar(255)
+)
+  ENGINE =InnoDB;
+
+CREATE TABLE reports(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_name VARCHAR(60) NOT NULL,
+  user_email varchar(60),
+  user_phone VARCHAR(60),
+  price DOUBLE,
+  buy_date DATETIME
 )
   ENGINE =InnoDB;
 
@@ -220,3 +231,8 @@ INSERT INTO product_ratings VALUES(1,4);
 
 INSERT INTO product_ratings VALUES(2,1);
 INSERT INTO product_ratings VALUES(3,1);
+
+INSERT INTO reports VALUES (1, "Евгений", "fiatskovich.w@gmail.com",+375291111111, 300, NOW());
+INSERT INTO reports VALUES (2, "Андрей", "andrey@gmail.com",+375291111112, 100, NOW());
+INSERT INTO reports VALUES (3, "Иван", "ivan@gmail.com",+375291111113, 500, NOW());
+INSERT INTO reports VALUES (4, "Аггей", "aggey@gmail.com",+375291111114, 330, NOW());
