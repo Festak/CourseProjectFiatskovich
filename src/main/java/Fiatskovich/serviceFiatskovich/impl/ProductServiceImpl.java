@@ -5,18 +5,18 @@ import Fiatskovich.daoFiatskovich.ProductDao;
 import Fiatskovich.modelFiatskovich.Advantage;
 import Fiatskovich.modelFiatskovich.Category;
 import Fiatskovich.modelFiatskovich.Product;
+import Fiatskovich.modelFiatskovich.Rating;
 import Fiatskovich.serviceFiatskovich.ProductService;
 import Fiatskovich.viewmodelFiatskovich.AdvantageViewModel;
 import Fiatskovich.viewmodelFiatskovich.CategoryViewModel;
 import Fiatskovich.viewmodelFiatskovich.ProductViewModel;
+import Fiatskovich.viewmodelFiatskovich.RatingViewModel;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.LinkedHashSet;
+import java.util.*;
 import java.util.concurrent.CancellationException;
 
 /**
@@ -32,9 +32,14 @@ public class ProductServiceImpl implements ProductService{
     private CategoryDao categoryDao;
 
     @Override
+    public void removeProductById(Long id) {
+        productDao.delete(id);
+    }
+
+    @Override
     @Transactional
-    public Product findProductById(Long id) {
-        return productDao.findOne(id);
+    public ProductViewModel findProductById(Long id) {
+        return productToProductViewModel(productDao.findOne(id));
     }
 
     @Override
@@ -47,12 +52,7 @@ public class ProductServiceImpl implements ProductService{
     @Transactional
     public ProductViewModel productToProductViewModelById(Long id) {
         Product product = productDao.findOne(id);
-        ProductViewModel model = new ProductViewModel(product.getId(),product.getName(),
-                product.getWeight(),product.getTemperature(),product.getMemory(),product.getPrice(),
-                product.getImageUrl());
-        model.setAdvantages(initAdvantagesViewModel(product.getAdvantages()));
-        model.setCategories(initCategoriesViewModel(product.getCategories()));
-        return model;
+        return productToProductViewModel(product);
     }
 
     @Override
@@ -83,21 +83,24 @@ public class ProductServiceImpl implements ProductService{
     }
     @Transactional
     @Override
-    public ProductViewModel getProductByProductName(String name) {
-        Product product = new Product();
+    public Set<ProductViewModel> getProductsByProductName(String name) {
+        Set<ProductViewModel> model = new LinkedHashSet<ProductViewModel>();
         List<Product> products = productDao.findAll();
         for(Product prod: products){
             if(prod.getName().equals(name)){
-                product = prod;
+                model.add(productToProductViewModel(prod));
             }
         }
-        return productToProductViewModel(product);
+        return model;
     }
 
     private ProductViewModel productToProductViewModel(Product product) {
         ProductViewModel model = new ProductViewModel(product.getId(),product.getName(),
                 product.getWeight(),product.getTemperature(),product.getMemory(),product.getPrice(),
                 product.getImageUrl());
+        model.setRatings(initRatingsViewModel(
+                product.getRatings()));
+        model.setRating(getAverageRating(model.getRatings()));
         model.setAdvantages(initAdvantagesViewModel(product.getAdvantages()));
         model.setCategories(initCategoriesViewModel(product.getCategories()));
         return model;
@@ -117,6 +120,24 @@ public class ProductServiceImpl implements ProductService{
             model.add(new CategoryViewModel(category.getId(),category.getName()));
         }
         return  model;
+    }
+
+    private List<RatingViewModel> initRatingsViewModel(List<Rating> ratings){
+        List<RatingViewModel> model = new LinkedList<RatingViewModel>();
+        for (Rating rating: ratings) {
+            model.add(new RatingViewModel(rating.getId(), rating.getUserId(), rating.getRating()));
+        }
+        return  model;
+    }
+
+    private double getAverageRating(List<RatingViewModel> ratings){
+        double average=0;
+        for(RatingViewModel rating: ratings){
+            average+=rating.getRating();
+        }
+        if(ratings.size()!=0)
+        average/=ratings.size();
+        return average;
     }
 
 

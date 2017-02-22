@@ -3,6 +3,8 @@ package Fiatskovich.modelFiatskovich;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,11 +22,18 @@ public class Product implements Serializable {
     @Column(name = "name")
     private String name;
 
+
     @ManyToMany
     @JoinTable(name = "product_categories",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<Category>();
+
+    @ManyToMany
+    @JoinTable(name = "product_ratings",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "rating_id"))
+    private List<Rating> ratings = new LinkedList<Rating>();
 
     @ManyToMany
     @JoinTable(name = "product_advantages",
@@ -62,9 +71,20 @@ public class Product implements Serializable {
         return name;
     }
 
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
+
 
     public Set<Category> getCategories() {
         return categories;

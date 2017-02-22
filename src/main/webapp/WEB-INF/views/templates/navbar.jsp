@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 
@@ -24,13 +26,14 @@
                     <form id="logoutForm" class="hidden" method="post" action="${contextPath}/logout">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </form>
-                    <li><a class="navbar-default" href="#">Личный кабинет</a></li>
+                    <li><a class="navbar-default" href="/roleconditions">Личный кабинет</a></li>
                     <li><a class="navbar-default" onclick="document.forms['logoutForm'].submit()">Выйти</a></li>
                 </c:if>
             </ul>
-            <form class="navbar-form"  style="float: right">
-            <input type="text" name="query" class="form-control col-lg-8" placeholder="Find">
-            </form>
+            <form:form class="navbar-form" style="float: right"
+            method="get" action="/indexsearch" commandName="form">
+            <form:input path="name" name="query" class="form-control col-lg-8" placeholder="Find"/>
+            </form:form>
         </div>
     </div>
 </nav>

@@ -23,10 +23,21 @@ public class Medal implements Serializable {
     @Column(name="description")
     private String description;
 
+    @Column(name="image_url")
+    private String imageUrl;
+
     @ManyToMany(mappedBy = "medals")
     private Set<User> users = new HashSet<User>();
 
     public Medal() {
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public int getId() {

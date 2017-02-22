@@ -12,6 +12,11 @@ public class RoleViewModel implements Serializable {
 
     private String name;
 
+    public RoleViewModel(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public RoleViewModel() {
     }
 

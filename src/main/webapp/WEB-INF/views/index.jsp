@@ -11,6 +11,7 @@
 <jsp:include page="templates/navbar.jsp"/>
 <br>
 <br>
+<a href="/product/basket">To Basket</a>
 <div class="container">
     <div class="row">
         <div class="col-md-2">
@@ -28,6 +29,8 @@
             <c:forEach var="advantage" items="${products.advantages}">
                 advantage: ${advantage.description}<br>
             </c:forEach>
+                    <a href="/product/details/${products.id}">Details</a>
+                    <a href="/product/addtobasket/${products.id}">Add to basket</a>
                 </div>
                     </c:forEach>
 

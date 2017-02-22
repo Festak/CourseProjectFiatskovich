@@ -2,6 +2,8 @@ DROP TABLE user_roles;
 DROP TABLE user_medals;
 DROP TABLE product_advantages;
 DROP TABLE product_categories;
+DROP TABLE product_ratings;
+DROP TABLE ratings;
 DROP TABLE advantages;
 DROP TABLE categories;
 DROP TABLE users;
@@ -42,9 +44,19 @@ CREATE TABLE user_roles (
 CREATE TABLE medals(
   id   INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(30) NOT NULL,
-  description VARCHAR(200)
+  description VARCHAR(200),
+  image_url VARCHAR(200)
 )
   ENGINE =InnoDB;
+
+CREATE TABLE ratings(
+  id   INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  rating INT,
+  user_id INT
+)
+  ENGINE =InnoDB;
+
+
 
 CREATE TABLE user_medals (
   user_id INT NOT NULL,
@@ -80,6 +92,17 @@ CREATE TABLE products(
 )
   ENGINE =InnoDB;
 
+
+CREATE TABLE product_ratings (
+  product_id INT NOT NULL,
+  rating_id INT NOT NULL,
+  FOREIGN KEY (product_id) REFERENCES products (id) ON DELETE CASCADE ON UPDATE  CASCADE,
+  FOREIGN KEY (rating_id) REFERENCES ratings (id) ON DELETE CASCADE ON UPDATE  CASCADE,
+
+  UNIQUE (product_id, rating_id)
+)
+  ENGINE = InnoDB;
+
 CREATE TABLE product_advantages (
   product_id INT NOT NULL,
   advantage_id INT NOT NULL,
@@ -106,6 +129,12 @@ CREATE TABLE product_categories (
 
 -- Insert data
 
+INSERT INTO ratings VALUES(1, 5, 1);
+INSERT INTO ratings VALUES(2, 5, 1);
+INSERT INTO ratings VALUES(3, 5, 1);
+INSERT INTO ratings VALUES(4, 5, 1);
+
+
 INSERT INTO users VALUES (1, 'admin', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG',
                           'second adress',200);
 
@@ -115,8 +144,8 @@ INSERT INTO users VALUES (2, 'neadmin', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV6
 INSERT INTO roles VALUES (1, 'ROLE_USER');
 INSERT INTO roles VALUES (2, 'ROLE_ADMIN');
 
-INSERT INTO medals VALUES (1, "Зарегистрировался", "В первый раз зарегистрировался и получил достижение");
-INSERT INTO medals VALUES (2, "Покупатель", "Купил свой первый товар на сайте");
+INSERT INTO medals VALUES (1, "Зарегистрировался", "В первый раз зарегистрировался и получил достижение", "http://res.cloudinary.com/festak/image/upload/v1479035397/medal2_uxl42t.png");
+INSERT INTO medals VALUES (2, "Покупатель", "Купил свой первый товар на сайте", "http://res.cloudinary.com/festak/image/upload/v1479047233/Registered_or977q.png");
 
 INSERT INTO user_medals VALUES(1,1);
 INSERT  INTO user_medals VALUES(1,2);
@@ -184,4 +213,10 @@ INSERT INTO product_advantages VALUES(7, 5);
 INSERT INTO product_advantages VALUES(7, 4);
 
 
+INSERT INTO product_ratings VALUES(1,1);
+INSERT INTO product_ratings VALUES(1,2);
+INSERT INTO product_ratings VALUES(1,3);
+INSERT INTO product_ratings VALUES(1,4);
 
+INSERT INTO product_ratings VALUES(2,1);
+INSERT INTO product_ratings VALUES(3,1);

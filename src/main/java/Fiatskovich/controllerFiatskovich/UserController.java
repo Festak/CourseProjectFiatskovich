@@ -1,6 +1,7 @@
 package Fiatskovich.controllerFiatskovich;
 
 import Fiatskovich.daoFiatskovich.UserDao;
+import Fiatskovich.helpers.Form;
 import Fiatskovich.modelFiatskovich.User;
 import Fiatskovich.serviceFiatskovich.SecurityService;
 import Fiatskovich.serviceFiatskovich.UserService;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by Евгений on 17.02.2017.
  */
 @Controller
-public class UserController {
+public class UserController{
     @Autowired
     private UserService userService;
 
@@ -35,6 +36,7 @@ public class UserController {
 
     @RequestMapping(value="/registration", method = RequestMethod.GET)
     public String register(Model model){
+        model.addAttribute("form", new Form());
         model.addAttribute("userForm", new User());
         return "/registration";
     }
@@ -42,7 +44,7 @@ public class UserController {
     @RequestMapping(value="/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm")User userForm,
                                BindingResult bindingResult, Model model){
-
+        model.addAttribute("form", new Form());
         userValidator.validate(userForm, bindingResult);
         if(bindingResult.hasErrors()){
             return "/registration";
@@ -54,6 +56,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
+        model.addAttribute("form", new Form());
         if (error != null) {
             model.addAttribute("error", "Введенные логин или пароль неверные.");
         }
@@ -95,6 +98,12 @@ public class UserController {
             model.addAttribute("user", user);
         }
         return "/labsevengo";
+    }
+
+    @RequestMapping(value = "/user/userpage")
+    public String userpage(Model model){
+        model.addAttribute("form", new Form());
+        return "/user/userpage";
     }
 
 }

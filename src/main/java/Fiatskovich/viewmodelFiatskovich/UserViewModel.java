@@ -2,6 +2,7 @@ package Fiatskovich.viewmodelFiatskovich;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -24,6 +25,13 @@ public class UserViewModel implements Serializable {
     private Set<RoleViewModel> roles = new HashSet<RoleViewModel>();
 
     private Set<MedalViewModel> medals = new HashSet<MedalViewModel>();
+
+    public UserViewModel(Long id, String username) {
+        this.id = id;
+        this.username = username;
+        this.roles = roles;
+        this.medals = medals;
+    }
 
     public UserViewModel(){}
 

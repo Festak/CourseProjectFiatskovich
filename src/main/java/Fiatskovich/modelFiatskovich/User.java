@@ -1,10 +1,12 @@
 package Fiatskovich.modelFiatskovich;
 
+import Fiatskovich.viewmodelFiatskovich.ProductViewModel;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -49,6 +51,17 @@ public class User implements Serializable {
     private Set<Medal> medals = new HashSet<Medal>();
 
     public User(){}
+
+    @Transient
+    private Set<ProductViewModel> products = new LinkedHashSet<ProductViewModel>();
+
+    public Set<ProductViewModel> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<ProductViewModel> products) {
+        this.products = products;
+    }
 
     public Set<Medal> getMedals() {
         return medals;

@@ -9,10 +9,12 @@ import java.util.Set;
  * Created by Евгений on 20.02.2017.
  */
 public interface ProductService {
-    Product findProductById(Long id);
+    void removeProductById(Long id);
+    ProductViewModel findProductById(Long id);
     Set<Product> listProducts();
     ProductViewModel productToProductViewModelById(Long id);
     Set<ProductViewModel> getAllProducts();
     Set<ProductViewModel> getAllProductsByCategoryId(int id);
-    ProductViewModel getProductByProductName(String name);
+    Set<ProductViewModel> getProductsByProductName(String name);
+
 }

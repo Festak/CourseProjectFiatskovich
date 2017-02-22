@@ -1,8 +1,9 @@
 package Fiatskovich.viewmodelFiatskovich;
 
+import Fiatskovich.modelFiatskovich.Rating;
+
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Евгений on 19.02.2017.
@@ -14,9 +15,9 @@ public class ProductViewModel implements Serializable {
 
     private String name;
 
-    private Set<CategoryViewModel> categories = new HashSet<CategoryViewModel>();
+    private Set<CategoryViewModel> categories = new LinkedHashSet<CategoryViewModel>();
 
-    private Set<AdvantageViewModel> advantages = new HashSet<AdvantageViewModel>();
+    private Set<AdvantageViewModel> advantages = new LinkedHashSet<AdvantageViewModel>();
 
     private int weight;
 
@@ -24,12 +25,18 @@ public class ProductViewModel implements Serializable {
 
     private int memory;
 
+private List<RatingViewModel> ratings = new LinkedList<RatingViewModel>();
+
+    private double rating;
+
     private double price;
 
     private String imageUrl;
 
 
-    public ProductViewModel(Long id, String name, int weight, String temperature, int memory, double price, String imageUrl) {
+
+    public ProductViewModel(Long id, String name, int weight, String temperature, int memory, double price, String imageUrl
+                            ) {
         this.id = id;
         this.name = name;
         this.weight = weight;
@@ -37,9 +44,27 @@ public class ProductViewModel implements Serializable {
         this.memory = memory;
         this.price = price;
         this.imageUrl = imageUrl;
+
     }
 
     public ProductViewModel(){}
+
+
+    public List<RatingViewModel> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<RatingViewModel> ratings) {
+        this.ratings = ratings;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
 
     public Long getId() {
         return id;
