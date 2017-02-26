@@ -216,7 +216,7 @@ INSERT INTO product_advantages VALUES(4, 5);
 INSERT INTO product_advantages VALUES(4, 3);
 INSERT INTO product_advantages VALUES(4, 2);
 
-INSERT INTO products VALUES(5, "Atlant XM 6002", 20000, "от -20 до 30 градусов", 0, 900, "");
+INSERT INTO products VALUES(5, "Atlant XM 6002", 20000, "от -20 до 30 градусов", 0, 900, "http://res.cloudinary.com/festak/image/upload/v1487522913/Atlant_XM_6002_htbdey.jpg");
 INSERT INTO product_categories VALUES (5, 4);
 INSERT INTO product_advantages VALUES(5, 1);
 INSERT INTO product_advantages VALUES(5, 5);
@@ -251,5 +251,3 @@ INSERT INTO subscribers VALUES(1, 1);
 INSERT INTO subscribers VALUES(1, 2);
 INSERT INTO subscribers VALUES(1, 3);
 INSERT INTO subscribers VALUES(2, 1);
-
-delete from products where id=5;

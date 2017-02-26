@@ -14,6 +14,7 @@ public interface ProductService {
     Set<Product> listProducts();
     ProductViewModel productToProductViewModelById(Long id);
     Set<ProductViewModel> getAllProducts();
+    Set<ProductViewModel> getCountOfProducts(int count);
     Set<ProductViewModel> getAllProductsByCategoryId(int id);
     Set<ProductViewModel> getProductsByProductName(String name);
     void addProductViewModelToDataBase(ProductViewModel product);

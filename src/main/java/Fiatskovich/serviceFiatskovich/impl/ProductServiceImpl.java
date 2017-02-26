@@ -58,6 +58,18 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     @Transactional
+    public Set<ProductViewModel> getCountOfProducts(int count) {
+        Set<Product> products = new LinkedHashSet<Product>(productDao.findAll().subList(0, count));
+        Set<ProductViewModel> models = new LinkedHashSet<ProductViewModel>();
+        for(Product product: products){
+            ProductViewModel temp = productToProductViewModel(product);
+            models.add(temp);
+        }
+        return models;
+    }
+
+    @Override
+    @Transactional
     public Set<ProductViewModel> getAllProducts() {
         Set<Product> products = new LinkedHashSet<Product>(productDao.findAll());
         Set<ProductViewModel> models = new LinkedHashSet<ProductViewModel>();

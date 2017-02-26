@@ -4,6 +4,7 @@ import Fiatskovich.cartFiatskovich.CartInfo;
 import Fiatskovich.cartFiatskovich.Utils;
 import Fiatskovich.helpers.Form;
 import Fiatskovich.modelFiatskovich.User;
+import Fiatskovich.serviceFiatskovich.AdvantageService;
 import Fiatskovich.serviceFiatskovich.CategoryService;
 import Fiatskovich.serviceFiatskovich.ProductService;
 import Fiatskovich.serviceFiatskovich.UserService;
@@ -39,14 +40,17 @@ private ProductService productService;
    @Autowired
    private CategoryService categoryService;
 
+    @Autowired
+    private AdvantageService advantageService;
+
    @Transactional
    @RequestMapping(value = {"/index", "/"}, method = RequestMethod.GET)
    public String index(Model model, HttpServletRequest req) {
        model.addAttribute("form", new Form());
-       model.addAttribute("categories", categoryService.getAllCategoriesViewModel());
-       model.addAttribute("products", productService.getAllProducts());
+      // model.addAttribute("categories", categoryService.getFiveCategoriesViewModel());
+       model.addAttribute("products", productService.getCountOfProducts(4));
+      // model.addAttribute("advantages", advantageService.getFiveAdvantages());
        CartInfo cartInfo = Utils.getCartInSession(req);
-     //  User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
        return "/index";
    }
 
@@ -57,7 +61,7 @@ private ProductService productService;
         model.addAttribute("form", new Form());
         model.addAttribute("categories", categoryService.getAllCategoriesViewModel());
         model.addAttribute("products", productService.getProductsByProductName(name));
-        return "/index";
+        return "redirect:/product/index";
     }
 
     @RequestMapping( value = {"/index/{id}"} )

@@ -34,6 +34,13 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryToCategoryViewModelCollection(set);
     }
 
+    @Override
+    @Transactional
+    public Set<CategoryViewModel> getFiveCategoriesViewModel() {
+        Set<Category> set = new LinkedHashSet<Category>(categoryDao.findAll().subList(0,5));
+        return categoryToCategoryViewModelCollection(set);
+    }
+
     @Transactional
     @Override
     public Set<CategoryViewModel> getAllCategoriesViewModelForSubscribe(String username)
