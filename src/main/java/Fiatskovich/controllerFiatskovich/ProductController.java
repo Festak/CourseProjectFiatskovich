@@ -42,11 +42,11 @@ public class ProductController{
 
     @RequestMapping(value="/product/addtobasket/{id}", method = RequestMethod.GET)
     @Transactional
-    public String addtobasket(@PathVariable(value="id")long id, Model model, HttpServletRequest req){
+    public void addtobasket(@PathVariable(value="id")long id, Model model, HttpServletRequest req){
         model.addAttribute("form", new Form());
         CartInfo cartInfo = Utils.getCartInSession(req);
         cartInfo.addProduct(productService.productToProductViewModelById(id));
-        return "redirect:/index";
+     //   return "redirect:/index";
     }
 
     @RequestMapping(value="/product/basket", method = RequestMethod.GET)

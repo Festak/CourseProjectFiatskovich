@@ -13,6 +13,7 @@ public class CategoryViewModel implements Serializable {
 
     private int id;
     private String name;
+    private boolean isSubscribed;
 
     public CategoryViewModel(int id, String name) {
         this.id = id;
@@ -20,6 +21,14 @@ public class CategoryViewModel implements Serializable {
     }
 
     public CategoryViewModel() {
+    }
+
+    public boolean isSubscribed() {
+        return isSubscribed;
+    }
+
+    public void setSubscribed(boolean subscribed) {
+        isSubscribed = subscribed;
     }
 
     public int getId() {

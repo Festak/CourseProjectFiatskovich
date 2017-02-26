@@ -19,4 +19,8 @@ public interface UserService {
     Set<UserViewModel> findAllViewModelUsers();
 
     void buyProducts(HttpServletRequest request);
+
+    void unSubscribeOnCategory(String username, int caregoryId);
+
+    void subscribeOnCategory(String username, int categoryId);
 }

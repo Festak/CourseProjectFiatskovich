@@ -4,7 +4,6 @@ import Fiatskovich.helpers.Form;
 import Fiatskovich.serviceFiatskovich.ProductService;
 import Fiatskovich.serviceFiatskovich.ReportService;
 import Fiatskovich.serviceFiatskovich.UserService;
-import Fiatskovich.viewmodelFiatskovich.AdvantageViewModel;
 import Fiatskovich.viewmodelFiatskovich.ProductViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by Евгений on 21.02.2017.
@@ -74,6 +75,7 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/editproduct", method = RequestMethod.POST)
     public String editProductAndToIndex(@ModelAttribute("product")ProductViewModel product){
+        product.setName(new String(product.getName().getBytes(), StandardCharsets.ISO_8859_1));
         productService.editProduct(product);
         return "redirect:/admin/index";
     }

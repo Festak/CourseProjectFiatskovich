@@ -22,9 +22,11 @@ public class UserViewModel implements Serializable {
 
     private String confirmPassword;
 
-    private Set<RoleViewModel> roles = new HashSet<RoleViewModel>();
+    private Set<RoleViewModel> roles = new LinkedHashSet<RoleViewModel>();
 
-    private Set<MedalViewModel> medals = new HashSet<MedalViewModel>();
+    private Set<MedalViewModel> medals = new LinkedHashSet<MedalViewModel>();
+
+    private Set<CategoryViewModel> categories = new LinkedHashSet<CategoryViewModel>();
 
     public UserViewModel(Long id, String username) {
         this.id = id;
@@ -34,6 +36,14 @@ public class UserViewModel implements Serializable {
     }
 
     public UserViewModel(){}
+
+    public Set<CategoryViewModel> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<CategoryViewModel> categories) {
+        this.categories = categories;
+    }
 
     public Set<MedalViewModel> getMedals() {
         return medals;

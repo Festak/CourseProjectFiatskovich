@@ -14,11 +14,12 @@
 <body>
 Введите данные о себе, и мы в течение часа свяжемся с вами:
 <jsp:include page="../../views/templates/navbar.jsp"/>
+<br>
 <form:form action="/user/buyall" modelAttribute="report">
-    <form:hidden path="id"/>
-    <form:input path="userName"/>
-    <form:input path="userEmail"/>
-    <form:input path="userPhone"/>
+    <form:hidden path="id"/><br>
+    <form:input path="userName"/><br>
+    <form:input path="userEmail"/><br>
+    <form:input path="userPhone"/><br>
     <input type="submit" value="Купить"/>
 </form:form>
 <jsp:include page="../../views/templates/scripts.jsp"/>

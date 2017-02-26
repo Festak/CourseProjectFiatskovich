@@ -3,6 +3,7 @@ DROP TABLE user_medals;
 DROP TABLE product_advantages;
 DROP TABLE product_categories;
 DROP TABLE product_ratings;
+DROP TABLE subscribers;
 DROP TABLE reports;
 DROP TABLE ratings;
 DROP TABLE advantages;
@@ -16,9 +17,7 @@ DROP TABLE products;
 CREATE TABLE users (
   id       INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  secondAdres VARCHAR(100),
-  credit INT
+  password VARCHAR(255) NOT NULL
 )
   ENGINE = InnoDB;
 
@@ -136,6 +135,17 @@ CREATE TABLE product_categories (
 )
   ENGINE = InnoDB;
 
+CREATE TABLE subscribers (
+  user_id     INT NOT NULL,
+  category_id INT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE ON UPDATE CASCADE ,
+
+  UNIQUE(user_id, category_id)
+
+)
+     ENGINE = InnoDB;
+
 
 
 -- Insert data
@@ -146,11 +156,11 @@ INSERT INTO ratings VALUES(3, 5, 1);
 INSERT INTO ratings VALUES(4, 5, 1);
 
 
-INSERT INTO users VALUES (1, 'admin', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG',
-                          'second adress',200);
+INSERT INTO users VALUES (1, 'admin', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG'
+                          );
 
-INSERT INTO users VALUES (2, 'neadmin', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG',
-                          'Ul Kulman',220);
+INSERT INTO users VALUES (2, 'neadmin', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG'
+                         );
 
 INSERT INTO roles VALUES (1, 'ROLE_USER');
 INSERT INTO roles VALUES (2, 'ROLE_ADMIN');
@@ -236,3 +246,10 @@ INSERT INTO reports VALUES (1, "Евгений", "fiatskovich.w@gmail.com",+3752
 INSERT INTO reports VALUES (2, "Андрей", "andrey@gmail.com",+375291111112, 100, NOW());
 INSERT INTO reports VALUES (3, "Иван", "ivan@gmail.com",+375291111113, 500, NOW());
 INSERT INTO reports VALUES (4, "Аггей", "aggey@gmail.com",+375291111114, 330, NOW());
+
+INSERT INTO subscribers VALUES(1, 1);
+INSERT INTO subscribers VALUES(1, 2);
+INSERT INTO subscribers VALUES(1, 3);
+INSERT INTO subscribers VALUES(2, 1);
+
+delete from products where id=5;

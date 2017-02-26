@@ -3,6 +3,7 @@ package Fiatskovich.modelFiatskovich;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -22,6 +23,9 @@ public class Category implements Serializable {
     @ManyToMany(mappedBy = "categories", cascade = CascadeType.ALL)
     private Set<Product> products = new HashSet<Product>();
 
+    @ManyToMany(mappedBy = "categories", cascade = CascadeType.ALL)
+    private Set<User> users = new LinkedHashSet<User>();
+
     public Category(int id, String name, Set<Product> products) {
         this.id = id;
         this.name = name;
@@ -29,6 +33,14 @@ public class Category implements Serializable {
     }
 
     public Category() {
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     public int getId() {

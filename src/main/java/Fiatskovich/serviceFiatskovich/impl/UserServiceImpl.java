@@ -1,17 +1,12 @@
 package Fiatskovich.serviceFiatskovich.impl;
 
 import Fiatskovich.cartFiatskovich.Utils;
+import Fiatskovich.daoFiatskovich.CategoryDao;
 import Fiatskovich.daoFiatskovich.RoleDao;
 import Fiatskovich.daoFiatskovich.UserDao;
-import Fiatskovich.modelFiatskovich.Medal;
-import Fiatskovich.modelFiatskovich.Product;
-import Fiatskovich.modelFiatskovich.Role;
-import Fiatskovich.modelFiatskovich.User;
+import Fiatskovich.modelFiatskovich.*;
 import Fiatskovich.serviceFiatskovich.UserService;
-import Fiatskovich.viewmodelFiatskovich.MedalViewModel;
-import Fiatskovich.viewmodelFiatskovich.ProductViewModel;
-import Fiatskovich.viewmodelFiatskovich.RoleViewModel;
-import Fiatskovich.viewmodelFiatskovich.UserViewModel;
+import Fiatskovich.viewmodelFiatskovich.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,8 +30,12 @@ public class UserServiceImpl implements UserService {
     private RoleDao roleDao;
 
     @Autowired
+    private CategoryDao categoryDao;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Transactional
     @Override
     public void save(Fiatskovich.modelFiatskovich.User user) {
  user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -73,10 +72,29 @@ public class UserServiceImpl implements UserService {
         Utils.removeCartInSession(req);
     }
 
+    @Transactional
+    @Override
+    public void unSubscribeOnCategory(String username, int categoryId) {
+     User user = userDao.findByUsername(username);
+        Category category = categoryDao.findOne(categoryId);
+        user.getCategories().remove(category);
+        userDao.save(user);
+    }
+
+    @Transactional
+    @Override
+    public void subscribeOnCategory(String username, int categoryId) {
+User user = userDao.findByUsername(username);
+        Category category = categoryDao.findOne(categoryId);
+        user.getCategories().add(category);
+        userDao.save(user);
+    }
+
     private UserViewModel userToUserViewModel(User user){
 UserViewModel model = new UserViewModel(user.getId(),user.getUsername());
         model.setMedals(medalsToMedalsViewModel(user.getMedals()));
         model.setRoles(rolesToRolesViewModel(user.getRoles()));
+        model.setCategories(initCategoriesViewModel(user.getCategories()));
         return model;
     }
 
@@ -84,6 +102,20 @@ UserViewModel model = new UserViewModel(user.getId(),user.getUsername());
         Set<MedalViewModel> model = new LinkedHashSet<MedalViewModel>();
         for(Medal medal: medals){
             model.add(medalToMedalViewModel(medal));
+        }
+        return  model;
+    }
+
+    private Category categoryViewModelToCategory(CategoryViewModel model){
+        Category category = new Category();
+        category.setName(model.getName());
+        return category;
+    }
+
+    private Set<CategoryViewModel> initCategoriesViewModel(Set<Category> categories){
+        Set<CategoryViewModel> model = new LinkedHashSet<CategoryViewModel>();
+        for (Category category: categories) {
+            model.add(new CategoryViewModel(category.getId(),category.getName()));
         }
         return  model;
     }

@@ -9,4 +9,6 @@ import java.util.Set;
  */
 public interface CategoryService {
     Set<CategoryViewModel> getAllCategoriesViewModel();
+    Set<CategoryViewModel> getAllCategoriesViewModelForSubscribe(String username);
+    Set<CategoryViewModel> getUserCategoriesViewModel(String username);
 }

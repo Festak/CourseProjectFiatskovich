@@ -29,12 +29,6 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @Column(name="secondAdres")
-    private String secondAdres;
-
-    @Column(name="credit")
-    private int credit;
-
     @Transient
     private String confirmPassword;
 
@@ -42,15 +36,29 @@ public class User implements Serializable {
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<Role>();
+    private Set<Role> roles = new LinkedHashSet<Role>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_medals",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "medal_id"))
-    private Set<Medal> medals = new HashSet<Medal>();
+    private Set<Medal> medals = new LinkedHashSet<Medal>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "subscribers",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories = new LinkedHashSet<Category>();
 
     public User(){}
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
 
     @Transient
     private Set<ProductViewModel> products = new LinkedHashSet<ProductViewModel>();
@@ -111,21 +119,6 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
-    public String getSecondAdres() {
-        return secondAdres;
-    }
-
-    public void setSecondAdres(String secondAdres) {
-        this.secondAdres = secondAdres;
-    }
-
-    public int getCredit() {
-        return credit;
-    }
-
-    public void setCredit(int credit) {
-        this.credit = credit;
-    }
 
 
 

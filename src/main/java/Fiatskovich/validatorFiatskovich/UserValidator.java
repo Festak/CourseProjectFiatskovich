@@ -9,10 +9,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-/**
- * implements {@link Validator} interface.
-/
- */
 
 @Component
 public class UserValidator implements Validator {

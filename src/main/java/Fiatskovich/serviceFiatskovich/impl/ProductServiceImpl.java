@@ -32,11 +32,8 @@ public class ProductServiceImpl implements ProductService{
     private CategoryDao categoryDao;
 
     @Override
-    @Transactional
     public void removeProductById(Long id) {
-        Product product = productDao.findOne(id);
-        productDao.delete(product);
-
+        productDao.delete(id);
     }
 
     @Override
