@@ -1,5 +1,4 @@
 package Fiatskovich.serviceFiatskovich.impl;
-
 import Fiatskovich.daoFiatskovich.CategoryDao;
 import Fiatskovich.daoFiatskovich.ProductDao;
 import Fiatskovich.modelFiatskovich.Advantage;
@@ -11,13 +10,11 @@ import Fiatskovich.viewmodelFiatskovich.AdvantageViewModel;
 import Fiatskovich.viewmodelFiatskovich.CategoryViewModel;
 import Fiatskovich.viewmodelFiatskovich.ProductViewModel;
 import Fiatskovich.viewmodelFiatskovich.RatingViewModel;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.concurrent.CancellationException;
 
 /**
  * Created by Евгений on 20.02.2017.
@@ -30,6 +27,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Autowired
     private CategoryDao categoryDao;
+
 
     @Override
     public void removeProductById(Long id) {
@@ -114,6 +112,7 @@ public class ProductServiceImpl implements ProductService{
 Product productToDatabase = productViewModelToProduct(product);
         productDao.save(productToDatabase);
     }
+
 
     @Override
     @Transactional

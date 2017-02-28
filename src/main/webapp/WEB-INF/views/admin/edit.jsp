@@ -9,16 +9,15 @@
 </head>
 <body>
 <jsp:include page="../../views/templates/header.jsp"/>
-
 <div class="content">
     <div class="contact">
         <div class="container">
-            <h3>Оформите заказ</h3>
+            <h3>Редактирование товара</h3>
             <div class="contact-grids">
                 <div class="contact-form">
                     <form:form method="post" action="/admin/editproduct" modelAttribute="product">
                         <form:hidden path="id" value="${product.id}"/>
-                        <div class="contact-bottom">
+                        <div class="contact-bottom" style="font-color: BLACK;">
                             <div class="col-md-6 in-contact">
                                 <span>Название продукта</span>
                                 <form:input path="name" value="${product.name}"/><br>
@@ -33,7 +32,7 @@
                             </div>
                             <div class="col-md-6 in-contact">
                                 <span>Память</span>
-                                <form:input path="memory" value="${product.memory"/>
+                                <form:input path="memory" value="${product.memory}"/>
                             </div>
                             <div class="col-md-6 in-contact">
                                 <span>Цена продукта</span>

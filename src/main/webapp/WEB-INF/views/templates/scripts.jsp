@@ -12,6 +12,7 @@
 <!-- Custom Theme files -->
 <!--theme-style-->
 <link href="${contextPath}/resources/css/template/style.css" rel="stylesheet" media="all">
+<link href="${contextPath}/resources/css/font-awesome.min.css" rel="stylesheet" media="all">
 <!--//theme-style-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -21,10 +22,13 @@
 <!-- start menu -->
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${contextPath}/resources/js/simpleCart.min.js"></script>
+
 <!-- slide -->
 <script src="${contextPath}/resources/js/jquery.flexslider.js"></script>
 <script src="${contextPath}/resources/js/responsiveslides.min.js"></script>
 <link href="${contextPath}/resources/css/template/popuo-box.css" media="all" rel="stylesheet">
+
+
 <script src="${contextPath}/resources/js/jquery.magnific-popup.js"></script>
 <script>
     $(function () {

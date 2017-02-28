@@ -61,7 +61,7 @@ private ProductService productService;
         model.addAttribute("form", new Form());
         model.addAttribute("categories", categoryService.getAllCategoriesViewModel());
         model.addAttribute("products", productService.getProductsByProductName(name));
-        return "redirect:/product/index";
+        return "/product/index";
     }
 
     @RequestMapping( value = {"/index/{id}"} )

@@ -5,10 +5,7 @@ import Fiatskovich.daoFiatskovich.UserDao;
 import Fiatskovich.helpers.Form;
 import Fiatskovich.modelFiatskovich.Report;
 
-import Fiatskovich.serviceFiatskovich.CategoryService;
-import Fiatskovich.serviceFiatskovich.ReportService;
-import Fiatskovich.serviceFiatskovich.SecurityService;
-import Fiatskovich.serviceFiatskovich.UserService;
+import Fiatskovich.serviceFiatskovich.*;
 import Fiatskovich.validatorFiatskovich.UserValidator;
 import Fiatskovich.viewmodelFiatskovich.ProductViewModel;
 import com.sun.org.apache.regexp.internal.RE;
@@ -44,6 +41,9 @@ public class UserController{
     private ReportService reportService;
 
     @Autowired
+    private MedalService medalService;
+
+    @Autowired
     private UserDao userDao;
 
     @RequestMapping(value="/registration", method = RequestMethod.GET)
@@ -61,6 +61,7 @@ public class UserController{
         if(bindingResult.hasErrors()){
             return "/registration";
         }
+        userForm.getMedals().add(medalService.findMedalById(1));
         userService.save(userForm);
         securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
         return "redirect:/welcome";

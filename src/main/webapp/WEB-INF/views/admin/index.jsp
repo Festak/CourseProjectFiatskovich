@@ -29,16 +29,16 @@
 <body>
 <jsp:include page="../../views/templates/header.jsp"/>
 <div class="content">
-<a href="/admin/report">Reports</a>
-<a href="${contextPath}/admin/addProduct">Добавить продукт</a>
     <div class="content">
         <div class="products">
             <div class="container">
                 <h2>Товары</h2>
                 <div class="col-md-9">
+                    <a href="/admin/addProduct">Добавить продукт</a>
                     <div class="content-top1">
                         <c:forEach var="products" items="${products}">
                             <div class="col-md-4 col-md4">
+                                <a href="/admin/edit/${products.id}"><i class="glyphicon glyphicon-edit"></i></a>
                                 <div class="col-md1 simpleCart_shelfItem">
                                     <a href="/product/details/${products.id}">
                                         <img class="img-responsive" src="${products.imageUrl}" style="width: 176px; height: 255px" alt="" />
@@ -88,6 +88,7 @@
                                 </li>
                             </c:forEach>
                         </ul>
+                        <h3 class="cate"><a href="/admin/report">Отчетность</a></h3>
                     </div>
                 </div>
                 <div class="clearfix"> </div>
