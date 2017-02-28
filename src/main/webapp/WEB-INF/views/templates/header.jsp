@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="header">
@@ -24,9 +25,9 @@
             </div>
             <div class="col-sm-2 search animated wow fadeInRight" data-wow-delay=".5s">
                 <a class="play-icon popup-with-zoom-anim"><i class="glyphicon glyphicon-search"> </i> </a>
-                <form:form class="navbar-form" style="float: right"
+                <form:form style="float: right"
                            method="get" action="/indexsearch" commandName="form">
-                    <form:input path="name" name="query" class="form-control col-lg-8" placeholder="Find"/>
+                    <form:input path="name" name="query" class="form-control col-md-4" placeholder="Find"/>
                 </form:form>
             </div>
             <div class="clearfix"> </div>

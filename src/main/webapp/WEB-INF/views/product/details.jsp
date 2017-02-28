@@ -20,10 +20,6 @@
     </script>
 </head>
 <body>
-<%
-    request.setCharacterEncoding("UTF-8");
-    response.setCharacterEncoding("UTF-8");
-%>
 <jsp:include page="../../views/templates/header.jsp"/>
 <div class="content">
 <div class="single">

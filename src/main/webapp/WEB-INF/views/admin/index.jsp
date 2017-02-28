@@ -7,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"  pageEncoding="UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Страница администратора</title>
@@ -26,49 +27,74 @@
     </script>
 </head>
 <body>
-
 <jsp:include page="../../views/templates/header.jsp"/>
-<br>
+<div class="content">
 <a href="/admin/report">Reports</a>
-<br>
 <a href="${contextPath}/admin/addProduct">Добавить продукт</a>
-<div class="container">
-    <div class="row">
-        <div class="col-md-9">
-            <div class="row">
-                <c:forEach var="products" items="${products}">
-                    <div class="col-md-4">
-                        Name: ${products.name}<br>
-                        <img src="${products.imageUrl}" style="width: 50px; height: 50px;"/>
-                        <a href="/product/details/${products.id}">Details</a>
-                        <a href="/admin/deleteProduct/${products.id}">Delete</a>
-                        <a href="/admin/edit/${products.id}">Edit</a>
+    <div class="content">
+        <div class="products">
+            <div class="container">
+                <h2>Товары</h2>
+                <div class="col-md-9">
+                    <div class="content-top1">
+                        <c:forEach var="products" items="${products}">
+                            <div class="col-md-4 col-md4">
+                                <div class="col-md1 simpleCart_shelfItem">
+                                    <a href="/product/details/${products.id}">
+                                        <img class="img-responsive" src="${products.imageUrl}" style="width: 176px; height: 255px" alt="" />
+                                    </a>
+                                    <h3><a href="/product/details/${products.id}">${products.name}</a></h3>
+                                    <div class="price">
+                                        <h5 class="item_price">$${products.price}</h5>
+                                        <a href="/product/addtobasket/${products.id}" class="item_add">В корзину</a>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                        <div class="clearfix"> </div>
                     </div>
-                    <br>
+                </div>
+                <div class="col-md-3 product-bottom">
+                    <script type="text/javascript">
+                        $(function() {
+                            var menu_ul = $('.menu-drop > li > ul'),
+                                    menu_a  = $('.menu-drop > li > a');
+                            menu_ul.hide();
+                            menu_a.click(function(e) {
+                                e.preventDefault();
+                                if(!$(this).hasClass('active')) {
+                                    menu_a.removeClass('active');
+                                    menu_ul.filter(':visible').slideUp('normal');
+                                    $(this).addClass('active').next().stop(true,true).slideDown('normal');
+                                } else {
+                                    $(this).removeClass('active');
+                                    $(this).next().stop(true,true).slideUp('normal');
+                                }
+                            });
+                        });
+                    </script>
 
-                </c:forEach>
+                    <div class=" rsidebar span_1_of_left">
+                        <h3 class="cate">Пользователи</h3>
+                        <ul class="menu-drop">
+                            <c:forEach var="users" items="${users}">
+                                <li class="item1"><a href="#">${users.username}</a>
+                                    <ul class="cute">
+                                        <c:forEach var="role" items="${users.roles}">
+                                        <li class="subitem1">${role.name}</li>
+                                        </c:forEach>
+                                            </ul>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
             </div>
         </div>
-<c:forEach var="users" items="${users}">
-        <div class="col-md-3">
-                    Name: ${users.username}<br>
-                    Roles:<br>
-                    <c:forEach var="role" items="${users.roles}">
-                        ${role.name}<br>
-                    </c:forEach>
-                    Medals:<br>
-                    <c:forEach var="medal" items="${users.medals}">
-                        ${medal.name}<br>
-                        <img src="${medal.imageUrl}" style="width: 16px; height: 16px;"/><br>
-                    </c:forEach>
-                <br>
-
-        </div>
-</c:forEach>
     </div>
 </div>
-
-
 
 <jsp:include page="../../views/templates/footer.jsp"/>
 

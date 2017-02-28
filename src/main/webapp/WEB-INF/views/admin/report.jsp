@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java"  pageEncoding="UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Отчетность</title>
@@ -21,7 +22,7 @@
 </head>
 <body>
 <jsp:include page="../../views/templates/header.jsp"/>
-<br>
+<div class="content">
 All reports:<br>
 <table>
     <tr>
@@ -41,6 +42,7 @@ All reports:<br>
     </tr>
 </c:forEach>
 </table>
+    </div>
 <jsp:include page="../../views/templates/footer.jsp"/>
 </body>
 </html>

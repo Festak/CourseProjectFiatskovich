@@ -21,9 +21,8 @@
 </head>
 <body>
 <jsp:include page="../../views/templates/header.jsp"/>
-<br>
-
-<table>
+<div class="content">
+<table class="table">
     <tr>
         <td>Категория</td>
         <td>Ваше действие</td>
@@ -41,7 +40,7 @@
     </c:forEach>
     </tr>
 </table>
-
+</div>
 <jsp:include page="../../views/templates/footer.jsp"/>
 </body>
 </html>

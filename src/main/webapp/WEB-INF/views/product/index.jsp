@@ -21,11 +21,6 @@
 </head>
 <body>
 <jsp:include page="../../views/templates/header.jsp"/>
-<!--content-->
-<%
-    request.setCharacterEncoding("UTF-8");
-    response.setCharacterEncoding("UTF-8");
-%>
 <div class="content">
     <div class="products">
         <div class="container">
@@ -51,15 +46,41 @@
                 </div>
             </div>
             <div class="col-md-3 product-bottom">
+                <script src="${contextPath}/resources/js/tagcanvas.min.js" type="text/javascript"></script>
+                <script type="text/javascript">
+                    window.onload = function() {
+                        try {
+                            TagCanvas.Start('myCanvas','tags',{
+                                textColour: '#ff0000',
+                                outlineColour: '#ff00ff',
+                                reverse: true,
+                                depth: 0.8,
+                                maxSpeed: 0.05
+                            });
+                        } catch(e) {
+                            // something went wrong, hide the canvas container
+                            document.getElementById('myCanvasContainer').style.display = 'none';
+                        }
+                    };
+                </script>
                 <!--categories-->
+
+
                 <div class=" rsidebar span_1_of_left">
-                    <h3 class="cate">Категории</h3>
-                    <ul class="menu-drop">
+                    <h2>Категории</h2>
+                <div id="myCanvasContainer">
+                    <canvas width="300" height="300" id="myCanvas">
+                    </canvas>
+                </div>
+                <div id="tags">
+                    <ul>
                         <c:forEach var="categories" items="${categories}">
-                            <a href="/product/index/${categories.id}">${categories.name}</a><br>
+                            <li><a href="/product/index/${categories.id}">${categories.name}</a></li>
                         </c:forEach>
                     </ul>
                 </div>
+                </div>
+
             </div>
             <div class="clearfix"> </div>
         </div>
