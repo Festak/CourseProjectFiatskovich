@@ -47,7 +47,6 @@
                         <h3><a href="/product/details/${products.id}">${products.name}</a></h3>
                         <div class="price">
                             <h5 class="item_price">$${products.price}</h5>
-                            <a href="/product/addtobasket/${products.id}" class="item_add">Add To Cart</a>
                             <div class="clearfix"> </div>
                         </div>
                     </div>

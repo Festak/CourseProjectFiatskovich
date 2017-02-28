@@ -8,13 +8,27 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"  pageEncoding="UTF-8" %>
+
 <html>
 <head>
     <title>Add product</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<jsp:include page="../../views/templates/scripts.jsp"/>
+<script>
+    $(function () {
+        $("#slider").responsiveSlides({
+            auto: true,
+            speed: 500,
+            namespace: "callbacks",
+            pager: true,
+        });
+    });
+</script>
 </head>
 <body>
-<jsp:include page="../../views/templates/navbar.jsp"/>
+<jsp:include page="../../views/templates/header.jsp"/>
 <br>
 
 <form:form method="post" action="/admin/saveProduct" modelAttribute="productForm">
@@ -31,7 +45,6 @@
     <input type="submit" value="Сохранить!" />
 </form:form>
 
-
-<jsp:include page="../../views/templates/scripts.jsp"/>
+<jsp:include page="../../views/templates/footer.jsp"/>
 </body>
 </html>

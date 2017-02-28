@@ -51,7 +51,7 @@ public class ProductController{
         model.addAttribute("form", new Form());
         CartInfo cartInfo = Utils.getCartInSession(req);
         cartInfo.addProduct(productService.productToProductViewModelById(id));
-        return "redirect:/index";
+        return "redirect:/product/index";
     }
 
     @RequestMapping(value="/product/removeAllFromBasket", method = RequestMethod.GET)

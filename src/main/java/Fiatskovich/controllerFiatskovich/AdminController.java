@@ -75,7 +75,7 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/editproduct", method = RequestMethod.POST)
     public String editProductAndToIndex(@ModelAttribute("product")ProductViewModel product){
-        product.setName(new String(product.getName().getBytes(), StandardCharsets.ISO_8859_1));
+    //    product.setName(new String(product.getName().getBytes(), StandardCharsets.ISO_8859_1));
         productService.editProduct(product);
         return "redirect:/admin/index";
     }

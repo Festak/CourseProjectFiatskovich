@@ -1,14 +1,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"  pageEncoding="UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>О товаре</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <jsp:include page="../../views/templates/scripts.jsp"/>
-    <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script>
+        $(function () {
+            $("#slider").responsiveSlides({
+                auto: true,
+                speed: 500,
+                namespace: "callbacks",
+                pager: true,
+            });
+        });
+    </script>
 </head>
 <body>
+<%
+    request.setCharacterEncoding("UTF-8");
+    response.setCharacterEncoding("UTF-8");
+%>
 <jsp:include page="../../views/templates/header.jsp"/>
 <div class="content">
 <div class="single">
@@ -21,6 +36,9 @@
                 <div class="single-para simpleCart_shelfItem">
                     <h2>Достоинства</h2>
                     <p><c:forEach var="advantages" items="${product.advantages}">${advantages.description};<br> </c:forEach></p>
+                    <p>Вес: ${product.weight}</p>
+                    <p>Память: ${product.memory}</p>
+                    <p>Температура: ${product.temperature}</p>
                     <div class="star-on">
                         <ul>
                             <li><a href="#"><i class="glyphicon glyphicon-star"> </i></a></li>

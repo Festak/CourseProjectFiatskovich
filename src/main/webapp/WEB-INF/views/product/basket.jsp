@@ -1,33 +1,64 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"  pageEncoding="UTF-8" %>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Корзина</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <jsp:include page="../../views/templates/scripts.jsp"/>
+    <script>
+        $(function () {
+            $("#slider").responsiveSlides({
+                auto: true,
+                speed: 500,
+                namespace: "callbacks",
+                pager: true,
+            });
+        });
+    </script>
     <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 </head>
 <body>
 <jsp:include page="../../views/templates/header.jsp"/>
-<br>
 
-<a href="${contextPath}/user/buy">Купить все</a>
-<c:forEach var="products" items="${products}">
-    <div class="col-md-6">
-        Name: ${products.name}<br>
-        <img src="${products.imageUrl}" style="width: 50px; height: 50px;"/>
-        Advantages:<br>
-        <c:forEach var="advantage" items="${products.advantages}">
-            advantage: ${advantage.description}<br>
-        </c:forEach>
-        <a href="/product/details/${products.id}">Details</a>
-        <a href="/product/addtobasket/${products.id}">Add to basket</a>
-        <a href="/product/removefrombasket/${products.id}">Remove</a>
+<div class="content">
+<div class="container">
+    <div class="check-out">
+        <h2>Корзина товаров</h2>
+        <table >
+            <tr>
+                <th>Товар</th>
+                <th>Цена</th>
+                <th>Подробности</th>
+                <th>Удалить товар</th>
+            </tr>
+            <c:forEach var="products" items="${products}">
+            <tr>
+                <td class="ring-in"><a href="/product/details/${products.id}" class="at-in">
+                    <img src="${products.imageUrl}" class="img-responsive" alt=""></a>
+                    <div class="sed">
+                        <h5>${products.name}</h5>
+                        <p><c:forEach var="advantages" items="${products.advantages}">
+                            ${advantages.description};
+                        </c:forEach></p>
+                    </div>
+                    <div class="clearfix"> </div></td>
+                <td>$${products.price}</td>
+                <td>Вес: ${products.weight}</td>
+                <td><a href="/product/removefrombasket/${products.id}">Удалить</a></td>
+            </tr>
+            </c:forEach>
+        </table>
+
+        <a href="/user/buy" class="to-buy">К покупке</a>
+        <div class="clearfix"> </div>
     </div>
-</c:forEach>
+</div>
+</div>
 <jsp:include page="../../views/templates/footer.jsp"/>
 </body>
 </html>
