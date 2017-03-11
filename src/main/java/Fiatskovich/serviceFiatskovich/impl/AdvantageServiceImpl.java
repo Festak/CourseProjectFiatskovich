@@ -15,7 +15,7 @@ import java.util.Set;
  * Created by Евгений on 26.02.2017.
  */
 @Service
-public class AdvantageServiceImpl implements AdvantageService {
+public class AdvantageServiceImpl extends TemplateServiceImpl implements AdvantageService {
 
     @Autowired
     private AdvantageDao advantageDao;
@@ -33,12 +33,5 @@ public class AdvantageServiceImpl implements AdvantageService {
         return advantage;
     }
 
-    private Set<AdvantageViewModel> initAdvantagesViewModel(Set<Advantage> advantages){
-        Set<AdvantageViewModel> model = new LinkedHashSet<AdvantageViewModel>();
-        for (Advantage advantage: advantages) {
-            model.add(new AdvantageViewModel(advantage.getId(),advantage.getDescription()));
-        }
-        return  model;
-    }
 
 }

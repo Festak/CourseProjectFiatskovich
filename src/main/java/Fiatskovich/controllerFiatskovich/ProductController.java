@@ -3,6 +3,7 @@ package Fiatskovich.controllerFiatskovich;
 import Fiatskovich.cartFiatskovich.CartInfo;
 import Fiatskovich.cartFiatskovich.Utils;
 import Fiatskovich.helpers.Form;
+import Fiatskovich.helpers.SendEmail;
 import Fiatskovich.modelFiatskovich.Report;
 import Fiatskovich.modelFiatskovich.User;
 import Fiatskovich.serviceFiatskovich.CategoryService;
@@ -68,6 +69,7 @@ public class ProductController{
     @Transactional
     public String index(Model model, HttpServletRequest req){
         model.addAttribute("form", new Form());
+        SendEmail send = new SendEmail("fiatskovich.w@gmail.com", "subject", "message");
         model.addAttribute("products", productService.getAllProducts());
         model.addAttribute("categories", categoryService.getAllCategoriesViewModel());
         return "/product/index";

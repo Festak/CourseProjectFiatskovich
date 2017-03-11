@@ -14,13 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.util.*;
 
 /**
  * Created by Евгений on 20.02.2017.
  */
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl extends TemplateServiceImpl implements ProductService{
 
     @Autowired
     private ProductDao productDao;
@@ -81,6 +84,7 @@ public class ProductServiceImpl implements ProductService{
     @Override
     @Transactional
     public Set<ProductViewModel> getAllProductsByCategoryId(int id) {
+        sendEmail();
     Category category = categoryDao.findOne(id);
         Set<Product> products = new LinkedHashSet<Product>(productDao.findAll());
         Set<ProductViewModel> productsViewModel = new LinkedHashSet<ProductViewModel>();
@@ -143,6 +147,7 @@ Product productToDatabase = productViewModelToProduct(product);
     private Category categoryViewModelToCategory(CategoryViewModel model){
         Category category = new Category();
         category.setName(model.getName());
+        sendEmail();
         return category;
     }
 
@@ -164,13 +169,6 @@ Product productToDatabase = productViewModelToProduct(product);
         return model;
     }
 
-    private Set<AdvantageViewModel> initAdvantagesViewModel(Set<Advantage> advantages){
-        Set<AdvantageViewModel> model = new LinkedHashSet<AdvantageViewModel>();
-        for (Advantage advantage: advantages) {
-            model.add(new AdvantageViewModel(advantage.getId(),advantage.getDescription()));
-        }
-        return  model;
-    }
 
     private Set<CategoryViewModel> initCategoriesViewModel(Set<Category> categories){
         Set<CategoryViewModel> model = new LinkedHashSet<CategoryViewModel>();
@@ -186,6 +184,41 @@ Product productToDatabase = productViewModelToProduct(product);
             model.add(new RatingViewModel(rating.getId(), rating.getUserId(), rating.getRating()));
         }
         return  model;
+    }
+
+    private void sendEmail(){
+
+        final String username = "fiatskovich.w@gmail.com";
+        final String password = "s1tzq8mg2";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "465");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("fiatskovich.w@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse("fiatskovich.w@gmail.com"));
+            message.setSubject("Testing Subject");
+            message.setText("Dear Mail Crawler,"
+                    + "\n\n No spam to my email, please!");
+
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private double getAverageRating(List<RatingViewModel> ratings){

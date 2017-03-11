@@ -1,7 +1,5 @@
 package Fiatskovich.viewmodelFiatskovich;
 
-import Fiatskovich.modelFiatskovich.Rating;
-
 import java.io.Serializable;
 import java.util.*;
 

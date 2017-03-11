@@ -8,17 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 
 
 public class Utils {
+
+    private Utils(){}
+
     public static CartInfo getCartInSession(HttpServletRequest request) {
-
-        // Get Cart from Session.
         CartInfo cartInfo = (CartInfo) request.getSession().getAttribute("myCart");
-
         if (cartInfo == null) {
             cartInfo = new CartInfo();
-
             request.getSession().setAttribute("myCart", cartInfo);
         }
-
         return cartInfo;
     }
 

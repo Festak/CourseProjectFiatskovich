@@ -3,12 +3,10 @@ package Fiatskovich.controllerFiatskovich;
 import Fiatskovich.cartFiatskovich.CartInfo;
 import Fiatskovich.cartFiatskovich.Utils;
 import Fiatskovich.helpers.Form;
-import Fiatskovich.modelFiatskovich.User;
-import Fiatskovich.serviceFiatskovich.AdvantageService;
+import Fiatskovich.helpers.SendEmail;
 import Fiatskovich.serviceFiatskovich.CategoryService;
 import Fiatskovich.serviceFiatskovich.ProductService;
 import Fiatskovich.serviceFiatskovich.UserService;
-import Fiatskovich.viewmodelFiatskovich.ProductViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,10 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.List;
 
 /**
  * Created by Евгений on 19.02.2017.
@@ -40,16 +37,12 @@ private ProductService productService;
    @Autowired
    private CategoryService categoryService;
 
-    @Autowired
-    private AdvantageService advantageService;
 
    @Transactional
    @RequestMapping(value = {"/index", "/"}, method = RequestMethod.GET)
    public String index(Model model, HttpServletRequest req) {
        model.addAttribute("form", new Form());
-      // model.addAttribute("categories", categoryService.getFiveCategoriesViewModel());
        model.addAttribute("products", productService.getCountOfProducts(4));
-      // model.addAttribute("advantages", advantageService.getFiveAdvantages());
        CartInfo cartInfo = Utils.getCartInSession(req);
        return "/index";
    }
