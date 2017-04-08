@@ -26,26 +26,26 @@ import java.util.Collection;
  * Created by Евгений on 19.02.2017.
  */
 @Controller
-public class HomeController{
+public class HomeController {
 
-@Autowired
-private ProductService productService;
+    @Autowired
+    private ProductService productService;
 
     @Autowired
     private UserService userService;
 
-   @Autowired
-   private CategoryService categoryService;
+    @Autowired
+    private CategoryService categoryService;
 
 
-   @Transactional
-   @RequestMapping(value = {"/index", "/"}, method = RequestMethod.GET)
-   public String index(Model model, HttpServletRequest req) {
-       model.addAttribute("form", new Form());
-       model.addAttribute("products", productService.getCountOfProducts(4));
-       CartInfo cartInfo = Utils.getCartInSession(req);
-       return "/index";
-   }
+    @Transactional
+    @RequestMapping(value = {"/index", "/"}, method = RequestMethod.GET)
+    public String index(Model model, HttpServletRequest req) {
+        model.addAttribute("form", new Form());
+        model.addAttribute("products", productService.getCountOfProducts(4));
+        CartInfo cartInfo = Utils.getCartInSession(req);
+        return "/index";
+    }
 
     @Transactional
     @RequestMapping(value = {"/indexsearch"}, method = RequestMethod.GET)
@@ -57,9 +57,9 @@ private ProductService productService;
         return "/product/index";
     }
 
-    @RequestMapping( value = {"/index/{id}"} )
+    @RequestMapping(value = {"/index/{id}"})
     @Transactional
-    public String indexByCategories(@PathVariable( value = "id") int id, Model model ) {
+    public String indexByCategories(@PathVariable(value = "id") int id, Model model) {
         model.addAttribute("form", new Form());
         model.addAttribute("categories", categoryService.getAllCategoriesViewModel());
         model.addAttribute("products", productService.getAllProductsByCategoryId(id));
@@ -67,31 +67,29 @@ private ProductService productService;
     }
 
     @RequestMapping(value = "/roleconditions")
-    public String index(Model model){
+    public String index(Model model) {
         model.addAttribute("form", new Form());
-        String test="";
-        Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)    SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-for(SimpleGrantedAuthority auth: authorities){
-    test = auth.getAuthority();
-    if(test.equals("ROLE_ADMIN")){
-        return "redirect:/admin/index";
+        String test = "";
+        Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        for (SimpleGrantedAuthority auth : authorities) {
+            test = auth.getAuthority();
+            if (test.equals("ROLE_ADMIN")) {
+                return "redirect:/admin/index";
+            }
+        }
+        return "redirect:/user/userpage";
+
     }
+
+
+    //  @Transactional
+    //  @RequestMapping( value = {"/index", "/"}, method = RequestMethod.GET )
+    //  public @ResponseBody List<ProductViewModel> index() {
+    //      List<ProductViewModel> list = new ArrayList<ProductViewModel>();
+    //      list.add(productService.productToProductViewModelById(1l));
+    //      return list;
+    //  }
+
+
 }
-            return "redirect:/user/userpage";
-
-    }
-
-
-
-
-  //  @Transactional
-  //  @RequestMapping( value = {"/index", "/"}, method = RequestMethod.GET )
-  //  public @ResponseBody List<ProductViewModel> index() {
-  //      List<ProductViewModel> list = new ArrayList<ProductViewModel>();
-  //      list.add(productService.productToProductViewModelById(1l));
-  //      return list;
-  //  }
-
-
-    }
 

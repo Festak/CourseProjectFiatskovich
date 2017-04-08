@@ -24,7 +24,7 @@ public class ProductViewModel implements Serializable {
 
     private int memory;
 
-private List<RatingViewModel> ratings = new LinkedList<RatingViewModel>();
+    private List<RatingViewModel> ratings = new LinkedList<RatingViewModel>();
 
     private double rating;
 
@@ -38,7 +38,7 @@ private List<RatingViewModel> ratings = new LinkedList<RatingViewModel>();
 
 
     public ProductViewModel(Long id, String name, int weight, String temperature, int memory, double price, String imageUrl
-                            ) {
+    ) {
         this.id = id;
         this.name = name;
         this.weight = weight;
@@ -49,7 +49,8 @@ private List<RatingViewModel> ratings = new LinkedList<RatingViewModel>();
 
     }
 
-    public ProductViewModel(){}
+    public ProductViewModel() {
+    }
 
     public AdvantageViewModel getAdvantageViewModel() {
         return advantageViewModel;

@@ -34,7 +34,7 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/index")
     @Transactional
-    public String index(Model model){
+    public String index(Model model) {
         model.addAttribute("form", new Form());
         model.addAttribute("users", userService.findAllViewModelUsers());
         model.addAttribute("products", productService.getAllProducts());
@@ -42,23 +42,23 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admin/addProduct")
-    public String addProduct(Model model){
+    public String addProduct(Model model) {
         model.addAttribute("form", new Form());
         model.addAttribute("productForm", new ProductViewModel());
         return "/admin/addProduct";
     }
 
-    @RequestMapping(value="/admin/saveProduct", method = RequestMethod.POST)
-    public String saveProduct(@ModelAttribute("productForm")ProductViewModel product,
-                              Model model){
+    @RequestMapping(value = "/admin/saveProduct", method = RequestMethod.POST)
+    public String saveProduct(@ModelAttribute("productForm") ProductViewModel product,
+                              Model model) {
         productService.addProductViewModelToDataBase(product);
         model.addAttribute("form", new Form());
         return "redirect:/admin/index";
     }
 
 
-    @RequestMapping(value="/admin/deleteProduct/{id}")
-    public String delete(@PathVariable(value = "id") long id, Model model){
+    @RequestMapping(value = "/admin/deleteProduct/{id}")
+    public String delete(@PathVariable(value = "id") long id, Model model) {
         productService.removeProductById(id);
         model.addAttribute("form", new Form());
         model.addAttribute("users", userService.findAllViewModelUsers());
@@ -67,21 +67,21 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admin/edit/{id}")
-    public String editProduct(@PathVariable("id") long id, Model model){
-        model.addAttribute("form",new Form());
+    public String editProduct(@PathVariable("id") long id, Model model) {
+        model.addAttribute("form", new Form());
         model.addAttribute("product", productService.findProductById(id));
         return "/admin/edit";
     }
 
     @RequestMapping(value = "/admin/editproduct", method = RequestMethod.POST)
-    public String editProductAndToIndex(@ModelAttribute("product")ProductViewModel product){
-    //    product.setName(new String(product.getName().getBytes(), StandardCharsets.ISO_8859_1));
+    public String editProductAndToIndex(@ModelAttribute("product") ProductViewModel product) {
+        //    product.setName(new String(product.getName().getBytes(), StandardCharsets.ISO_8859_1));
         productService.editProduct(product);
         return "redirect:/admin/index";
     }
 
     @RequestMapping(value = "/admin/report", method = RequestMethod.GET)
-    public String report(Model model){
+    public String report(Model model) {
         model.addAttribute("form", new Form());
         model.addAttribute("reports", reportService.getAllReports());
         return "/admin/report";

@@ -28,7 +28,7 @@ h1,h2,h3,h4,h5,h6,label,p{
 }
 /*----*/
 .logo span {
-    color: #fa03bb;
+    color: #55a1fa;
 }
 .header-top {
     padding: 15px 0;
@@ -232,14 +232,14 @@ ul.nav-list.list-inline li {
 }
 .tes h2 {
     font-size: 4em;
-    color:#fa03bb;
+    color:#55a1fa;
 	margin:0;
 	font-family: 'Poiret One', cursive;
 	font-weight:700;
 }
 .tes p {
     font-size: 2em;
-    color: #fa03bb;
+    color: #55a1fa;
     margin: 0.5em;
 	text-align:right;
 }
@@ -270,13 +270,13 @@ ul.nav-list.list-inline li {
 	font-weight:700;
 }
 .world h6 {
-    color: #fa03bb;
+    color: #55a1fa;
     font-size: 1.2em;
     margin: 0;
 	font-family: 'OleoScript-Regular';
 }
 .world p {
-    color: #fa03bb;
+    color: #55a1fa;
     font-size: 0.9em;
     margin: 0;
 }
@@ -285,7 +285,7 @@ ul.nav-list.list-inline li {
   margin-top: 1%;
 }
 i.glyphicon.glyphicon-search {
-  color:#fa03bb;
+  color:#55a1fa;
   font-size: 1em;
 }
 .world {
@@ -385,7 +385,7 @@ a.item_add {
 	border-radius:50px;
 }
 .callbacks_here a:after{
-	background:#fa03bb;
+	background:#55a1fa;
 }
 .callbacks_tabs a{
 	visibility:hidden;
@@ -424,7 +424,7 @@ ul.callbacks_tabs.callbacks1_tabs {
     color: #000;
 }
 .col-md1 h3 a {
-    color: #fa03bb;
+    color: #55a1fa;
     text-decoration: none;
     font-family: 'Poiret One', cursive;
     font-weight: 700;
@@ -460,7 +460,7 @@ ul.callbacks_tabs.callbacks1_tabs {
 }
 
 .col-md1:hover .price a {
-  background-color:#fa03bb;
+  background-color:#55a1fa;
   transition: 0.5s all;
   -webkit-transition: 0.5s all;
   -o-transition: 0.5s all;
@@ -557,14 +557,14 @@ ul.callbacks_tabs.callbacks1_tabs {
 }
 .top-footer1 h3 {
     font-size: 2em;
-    color: #fa03bb;
+    color: #55a1fa;
     margin: 0 0 0.5em;
 	font-family: 'Poiret One', cursive;
 	font-weight:700;
 }
 .top-footer h3 {
     font-size: 2em;
-    color: #fa03bb;
+    color: #55a1fa;
     margin: 0 0 0.5em;
 	font-family: 'Poiret One', cursive;
 	font-weight:700;
@@ -589,7 +589,7 @@ ul.callbacks_tabs.callbacks1_tabs {
   outline: none;
 }
 .top-footer1 input[type="submit"]:hover {
-  background-color:#fa03bb;
+  background-color:#55a1fa;
 }
 .footer {
   border-top: 1px solid #BDBDBD;
@@ -599,7 +599,7 @@ ul.callbacks_tabs.callbacks1_tabs {
 }
 .footer-bottom-cate h6 {
     font-size: 1.6em;
-    color: #fa03bb;
+    color: #55a1fa;
     margin: 0 0 1em;
 	font-family: 'Poiret One', cursive;
 	font-weight:700;
@@ -626,7 +626,7 @@ ul.callbacks_tabs.callbacks1_tabs {
 	color: #B2B2B2;
 }
 .cate-bottom ul li.phone {
-	color:#fa03bb;
+	color:#55a1fa;
 	padding: 1em 0 0em;
 }
 p.footer-class {
@@ -637,7 +637,7 @@ p.footer-class {
 }
 p.footer-class a{
   text-decoration:none;
-  color: #fa03bb;
+  color: #55a1fa;
 }
 p.footer-class a:hover{
   color:  #B2B2B2;
@@ -663,7 +663,7 @@ p.footer-class a:hover{
 }
 .contact h3 {
     font-size: 3em;
-    color: #fa03bb;
+    color: #55a1fa;
     margin: 0 0px 1em;
     text-align: center;
 	font-family: 'Poiret One', cursive;
@@ -716,7 +716,7 @@ p.footer-class a:hover{
 	-ms-transition: 0.5s all;
 }
 .contact-form input[type="submit"]:hover{
-	background: #fa03bb;
+	background: #55a1fa;
 }
 .address-grid i{
 	color:#403b37;
@@ -740,10 +740,10 @@ p.footer-class a:hover{
 	color: #b2b2b2;
 }
 .address1 p a:hover{
-	color:#fa03bb;
+	color:#55a1fa;
 }
 .address-more h2{
-	color:#fa03bb;
+	color:#55a1fa;
 	font-size:2em;
 	margin: 0 15px 0.7em;
 	font-family: 'Poiret One', cursive;
@@ -762,7 +762,7 @@ p.footer-class a:hover{
 .breadcrumb1 li span {
     left: 0em;
     padding-right: 1em;
-    color: #fa03bb;
+    color: #55a1fa;
 }
 .breadcrumbs {
     padding: 1.5em 0 !important; 
@@ -774,7 +774,7 @@ p.footer-class a:hover{
      margin-bottom: 0 !important;
 }
 .breadcrumb1 li a {
-    color: #fa03bb;
+    color: #55a1fa;
     text-decoration: none;
 }
 .breadcrumb > .active {
@@ -786,7 +786,7 @@ p.footer-class a:hover{
 }
 /*--login--*/
 .account h2 {
-    color: #fa03bb;
+    color: #55a1fa;
     font-size: 3em;
     margin: 0 0 1em;
     text-align: center;
@@ -794,7 +794,7 @@ p.footer-class a:hover{
 	font-weight:700;
 }
 .login-left h4{
-	color:#fa03bb;
+	color:#55a1fa;
 	font-size: 1.3em;
 }
  .login-left p {
@@ -818,7 +818,7 @@ p.footer-class a:hover{
 	text-transform: uppercase;
 }
 .acount-btn:hover, .login-right input[type="submit"]:hover{
-	background:#fa03bb;
+	background:#55a1fa;
 	text-decoration:none;
 	color:#fff;
 }
@@ -836,7 +836,7 @@ p.footer-class a:hover{
 }
 .login-right input[type="text"] {
 	border: 1px solid #bbb;
-	outline-color:#fa03bb;
+	outline-color:#55a1fa;
 	width: 96%;
 	font-size:0.9em;
 	padding:10px;
@@ -844,7 +844,7 @@ p.footer-class a:hover{
 }
 .login-right input[type="password"] {
 	border: 1px solid #bbb;
-	outline-color:#fa03bb;
+	outline-color:#55a1fa;
 	width: 96%;
 	font-size:0.9em;
 	padding:10px;
@@ -907,7 +907,7 @@ ul.social {
 }
 /*--register--*/
 .register h2 {
-	color:#fa03bb;
+	color:#55a1fa;
 	font-size:3em;
 	margin:0 0 1em;
 	text-align:center;
@@ -922,7 +922,7 @@ ul.social {
 }
 .register-top-grid input[type="text"], .register-bottom-grid input[type="password"] {
 	border: 1px solid #EEE;
-	outline-color:#fa03bb;
+	outline-color:#55a1fa;
 	width: 100%;
 	font-size: 1em;
 	padding: 0.5em;
@@ -930,7 +930,7 @@ ul.social {
 }
 .register-bottom-grid input[type="password"] {
 	border: 1px solid #EEE;
-	outline-color:#fa03bb;
+	outline-color:#55a1fa;
 	width: 100%;
 	font-size: 1em;
 	padding: 0.5em;
@@ -971,7 +971,7 @@ ul.social {
 	width:20px;
 	height:20px;
 	outline: none;
-	border: 2px solid #fa03bb;
+	border: 2px solid #55a1fa;
 }
 .checkbox input + i:after {
     content: '';
@@ -1006,7 +1006,7 @@ ul.social {
 	margin-top:1em;
 }
 .register-but form input[type="submit"] {
-	background:#fa03bb;
+	background:#55a1fa;
 	color: #FFF;
 	font-size:1em;
 	padding: 0.4em 1em;
@@ -1029,7 +1029,7 @@ ul.social {
 }
 /*--product--*/
 .products h2{
-	color:#fa03bb;
+	color:#55a1fa;
 	font-size: 3em;
 	text-align: center;
 	margin: 0 0 1em;
@@ -1041,7 +1041,7 @@ ul.social {
 }
 /*--menu-drop--*/
 h3.cate {
-    color: #fa03bb;
+    color: #55a1fa;
     font-size: 1.5em;
     font-family: 'Poiret One', cursive;
     font-weight: 700;
@@ -1112,7 +1112,7 @@ span.price-in1 {
   font-size: 1.3em;
   padding: 0.3em 0 0;
   display: block;
-  color:#fa03bb;
+  color:#55a1fa;
 }
 .product-go {
   padding: 1em 0;
@@ -1154,7 +1154,7 @@ span.price-in1 {
 /*--single--*/
 .single-para h2 {
     font-size: 1.5em;
-    color: #fa03bb;
+    color: #55a1fa;
     line-height: 1.5em;
     font-family: 'Poiret One', cursive;
     font-weight: 700;
@@ -1162,11 +1162,11 @@ span.price-in1 {
 label.add-to{
 	display:block;
 	font-size: 2em;
-	color:#fa03bb;
+	color:#55a1fa;
 }
 .single-para p{
 	font-size:0.9em;
-	color:#B2B2B2;
+	color: #783db2;
 	line-height:1.8em;
 }
 a.cart{
@@ -1181,7 +1181,7 @@ a.cart{
   text-decoration:none;
 }
 a.cart:hover{
-	background:#fa03bb;
+	background:#55a1fa;
 }
 /*----*/
 .star-on {
@@ -1207,7 +1207,7 @@ a.cart:hover{
 	color:#403b37;
 }
 .star-on a:hover{
-	color:#fa03bb;
+	color:#55a1fa;
 }
 .single-bottom h4{
 	color:#000;
@@ -1291,7 +1291,7 @@ a.at-in {
 }
 .check-out h2 {
     font-size: 3em;
-  color: #fa03bb;
+  color: #55a1fa;
   margin: 0 0px 1em;
   text-align: center;
 }
@@ -1307,7 +1307,7 @@ a.to-buy{
   text-decoration: none;
 }
 a.to-buy:hover{
-  background: #fa03bb;
+  background: #55a1fa;
 }
 /*--//checkout--*/
 /*-- content --*/
@@ -1579,7 +1579,7 @@ a.to-buy:hover{
 }
 .info-content h4 {
     font-size: 35px;
-    color: #fa03bb;
+    color: #55a1fa;
     text-transform: uppercase;
 }
 /*-- //content --*/
@@ -1913,7 +1913,7 @@ ul.nav_1 li {
     width: 22px;
     height: 3px;
     border-radius: 1px;
-    background-color: #fa03bb;
+    background-color: #55a1fa;
 }
 .nav-list > li {
     padding: 0px 15px 15px;

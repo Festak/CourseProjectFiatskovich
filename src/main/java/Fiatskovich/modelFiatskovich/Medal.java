@@ -9,21 +9,21 @@ import java.util.Set;
  * Created by Евгений on 18.02.2017.
  */
 @Entity
-@Table(name="medals")
+@Table(name = "medals")
 public class Medal implements Serializable {
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
- private int id;
+    private int id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="description")
+    @Column(name = "description")
     private String description;
 
-    @Column(name="image_url")
+    @Column(name = "image_url")
     private String imageUrl;
 
     @ManyToMany(mappedBy = "medals", cascade = CascadeType.ALL)

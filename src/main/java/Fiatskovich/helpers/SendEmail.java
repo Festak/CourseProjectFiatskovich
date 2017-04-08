@@ -18,40 +18,28 @@ public class SendEmail {
         this.emailSubject = Subject;
         this.emailBody = message;
 
-        Properties props = new Properties();
-        props.put("mail.smtp.user", senderEmail);
-        props.put("mail.smtp.host", emailSMTPserver);
-        props.put("mail.smtp.port", emailServerPort);
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.socketFactory.port", emailServerPort);
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        java.util.Properties props = new java.util.Properties();
+        props.put("mail.smtp.host", "smtp.myisp.com");
+        Session session = Session.getDefaultInstance(props, null);
 
-        SecurityManager security = System.getSecurityManager();
-
+// Construct the message
+        String to = senderEmail;
+        String from = senderEmail;
+        String subject = "Hello";
+        Message msg = new MimeMessage(session);
         try {
-            Authenticator auth = new SMTPAuthenticator();
-            Session session = Session.getInstance(props, auth);
+            msg.setFrom(new InternetAddress(from));
+            msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            msg.setSubject(subject);
+            msg.setText("Hi,\n\nHow are you?");
 
-            Message msg = new MimeMessage(session);
-            msg.setText(emailBody);
-            msg.setSubject(emailSubject);
-            msg.setFrom(new InternetAddress(senderEmail));
-            msg.addRecipient(Message.RecipientType.TO,
-                    new InternetAddress(receiverEmail));
+            // Send the message.
             Transport.send(msg);
-            System.out.println("send successfully");
-        } catch (Exception ex) {
-            System.err.println("Error occurred while sending.!");
+        } catch (MessagingException e) {
+            // Error.
         }
 
     }
 
-    private class SMTPAuthenticator extends javax.mail.Authenticator {
-
-        public PasswordAuthentication getPasswordAuthentication() {
-            return new PasswordAuthentication(senderEmail, senderPassword);
-        }
     }
 
-}

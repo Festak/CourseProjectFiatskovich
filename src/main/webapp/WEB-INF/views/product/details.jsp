@@ -37,12 +37,13 @@
                     <p>Температура: ${product.temperature}</p>
                     <div class="star-on">
                         <ul>
-                            <li><a href="#"><i class="glyphicon glyphicon-star"> </i></a></li>
-                            <li><a href="#"><i class="glyphicon glyphicon-star"> </i></a></li>
-                            <li><a href="#"><i class="glyphicon glyphicon-star"> </i></a></li>
-                            <li><a href="#"><i class="glyphicon glyphicon-star"> </i></a></li>
-                            <li><a href="#"><i class="glyphicon glyphicon-star"> </i></a></li>
+                            <li><a href="/product/setonerating/${product.id}"><i class="glyphicon glyphicon-star"> </i></a></li>
+                            <li><a href="/product/settworating/${product.id}"><i class="glyphicon glyphicon-star"> </i></a></li>
+                            <li><a href="/product/setthreerating/${product.id}"><i class="glyphicon glyphicon-star"> </i></a></li>
+                            <li><a href="/product/setfourrating/${product.id}"><i class="glyphicon glyphicon-star"> </i></a></li>
+                            <li><a href="/product/setfiverating/${product.id}"><i class="glyphicon glyphicon-star"> </i></a></li>
                         </ul>
+                        Рейтинг: ${product.rating}
                         <div class="clearfix"> </div>
                     </div>
                     <label class="add-to item_price">$${product.price}</label>

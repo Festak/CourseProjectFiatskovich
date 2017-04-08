@@ -15,7 +15,31 @@
                             <span class="simpleCart_total"></span></div>
                             <img src="${contextPath}/resources/images/cart.png" alt=""/></h3>
                     </a>
-                    <p><a href="/product/removeAllFromBasket" class="simpleCart_empty">Очистить</a></p>
+                    <p><a href="/product/removeAllFromBasket" id="simpleCart_empty" class="simpleCart_empty">Очистить</a></p>
+
+
+                    <script>
+                        jQuery(document).ready(
+                                function($) {
+
+                                    $("#simpleCart_empty").click(function() {
+
+                                        $.ajax({
+                                            type: "POST",
+                                            contentType: "application/json",
+                                            url: "/product/removeAllFromBasket",
+                                            success: function () {
+                                            },
+                                            error: function () {
+                                            }
+                                        });
+
+
+                                    });
+
+                                });
+                    </script>
+
 
                 </div>
             </div>

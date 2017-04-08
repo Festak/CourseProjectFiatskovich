@@ -29,6 +29,9 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
 
+    @Column(name="email")
+    private String email;
+
     @Transient
     private String confirmPassword;
 
@@ -120,7 +123,11 @@ public class User implements Serializable {
     }
 
 
+    public String getEmail() {
+        return email;
+    }
 
-
-
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
