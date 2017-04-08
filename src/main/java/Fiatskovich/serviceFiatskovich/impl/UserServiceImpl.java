@@ -2,6 +2,7 @@ package Fiatskovich.serviceFiatskovich.impl;
 
 import Fiatskovich.cartFiatskovich.Utils;
 import Fiatskovich.daoFiatskovich.CategoryDao;
+import Fiatskovich.daoFiatskovich.MedalDao;
 import Fiatskovich.daoFiatskovich.RoleDao;
 import Fiatskovich.daoFiatskovich.UserDao;
 import Fiatskovich.modelFiatskovich.*;
@@ -35,13 +36,19 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private MedalDao medalDao;
+
     @Transactional
     @Override
     public void save(Fiatskovich.modelFiatskovich.User user) {
- user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Set<Role> roles = new HashSet<Role>();
         roles.add(roleDao.getOne(1L));
+        Set<Medal> medals = new LinkedHashSet<>();
+        medals.add(medalDao.findOne(1));
         user.setRoles(roles);
+        user.setMedals(medals);
         userDao.save(user);
     }
 
@@ -60,7 +67,7 @@ public class UserServiceImpl implements UserService {
     public Set<UserViewModel> findAllViewModelUsers() {
         Set<User> users = new LinkedHashSet<User>(userDao.findAll());
         Set<UserViewModel> models = new LinkedHashSet<UserViewModel>();
-        for(User user: users){
+        for (User user : users) {
             UserViewModel temp = userToUserViewModel(user);
             models.add(temp);
         }
@@ -75,7 +82,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void unSubscribeOnCategory(String username, int categoryId) {
-     User user = userDao.findByUsername(username);
+        User user = userDao.findByUsername(username);
         Category category = categoryDao.findOne(categoryId);
         user.getCategories().remove(category);
         userDao.save(user);
@@ -84,61 +91,59 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void subscribeOnCategory(String username, int categoryId) {
-User user = userDao.findByUsername(username);
+        User user = userDao.findByUsername(username);
         Category category = categoryDao.findOne(categoryId);
         user.getCategories().add(category);
         userDao.save(user);
     }
 
-    private UserViewModel userToUserViewModel(User user){
-UserViewModel model = new UserViewModel(user.getId(),user.getUsername());
+    private UserViewModel userToUserViewModel(User user) {
+        UserViewModel model = new UserViewModel(user.getId(), user.getUsername());
         model.setMedals(medalsToMedalsViewModel(user.getMedals()));
         model.setRoles(rolesToRolesViewModel(user.getRoles()));
         model.setCategories(initCategoriesViewModel(user.getCategories()));
         return model;
     }
 
-    private Set<MedalViewModel> medalsToMedalsViewModel(Set<Medal> medals){
+    private Set<MedalViewModel> medalsToMedalsViewModel(Set<Medal> medals) {
         Set<MedalViewModel> model = new LinkedHashSet<MedalViewModel>();
-        for(Medal medal: medals){
+        for (Medal medal : medals) {
             model.add(medalToMedalViewModel(medal));
         }
-        return  model;
+        return model;
     }
 
-    private Category categoryViewModelToCategory(CategoryViewModel model){
+    private Category categoryViewModelToCategory(CategoryViewModel model) {
         Category category = new Category();
         category.setName(model.getName());
         return category;
     }
 
-    private Set<CategoryViewModel> initCategoriesViewModel(Set<Category> categories){
+    private Set<CategoryViewModel> initCategoriesViewModel(Set<Category> categories) {
         Set<CategoryViewModel> model = new LinkedHashSet<CategoryViewModel>();
-        for (Category category: categories) {
-            model.add(new CategoryViewModel(category.getId(),category.getName()));
+        for (Category category : categories) {
+            model.add(new CategoryViewModel(category.getId(), category.getName()));
         }
-        return  model;
+        return model;
     }
 
-    private Set<RoleViewModel> rolesToRolesViewModel(Set<Role> roles){
+    private Set<RoleViewModel> rolesToRolesViewModel(Set<Role> roles) {
         Set<RoleViewModel> model = new LinkedHashSet<RoleViewModel>();
-        for(Role role: roles){
+        for (Role role : roles) {
             model.add(roleToRoleViewModel(role));
         }
         return model;
     }
 
-    private MedalViewModel medalToMedalViewModel(Medal medal){
-        MedalViewModel model = new MedalViewModel(medal.getId(),medal.getName(), medal.getDescription(), medal.getImageUrl());
-    return model;
-    }
-
-    private RoleViewModel roleToRoleViewModel(Role role){
-        RoleViewModel model = new RoleViewModel(role.getId(), role.getName());
+    private MedalViewModel medalToMedalViewModel(Medal medal) {
+        MedalViewModel model = new MedalViewModel(medal.getId(), medal.getName(), medal.getDescription(), medal.getImageUrl());
         return model;
     }
 
-
+    private RoleViewModel roleToRoleViewModel(Role role) {
+        RoleViewModel model = new RoleViewModel(role.getId(), role.getName());
+        return model;
+    }
 
 
 }

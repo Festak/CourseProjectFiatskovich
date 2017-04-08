@@ -3,6 +3,7 @@ package Fiatskovich.modelFiatskovich;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -14,7 +15,7 @@ public class Medal implements Serializable {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "name")
@@ -27,7 +28,7 @@ public class Medal implements Serializable {
     private String imageUrl;
 
     @ManyToMany(mappedBy = "medals", cascade = CascadeType.ALL)
-    private Set<User> users = new HashSet<User>();
+    private Set<User> users = new LinkedHashSet<User>();
 
     public Medal() {
     }

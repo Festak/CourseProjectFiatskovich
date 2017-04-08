@@ -18,28 +18,6 @@
                     <p><a href="/product/removeAllFromBasket" id="simpleCart_empty" class="simpleCart_empty">Очистить</a></p>
 
 
-                    <script>
-                        jQuery(document).ready(
-                                function($) {
-
-                                    $("#simpleCart_empty").click(function() {
-
-                                        $.ajax({
-                                            type: "POST",
-                                            contentType: "application/json",
-                                            url: "/product/removeAllFromBasket",
-                                            success: function () {
-                                            },
-                                            error: function () {
-                                            }
-                                        });
-
-
-                                    });
-
-                                });
-                    </script>
-
 
                 </div>
             </div>

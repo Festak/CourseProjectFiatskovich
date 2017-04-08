@@ -19,12 +19,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.LinkedHashSet;
 
 /**
  * Created by Евгений on 17.02.2017.
  */
 @Controller
-public class UserController{
+public class UserController {
     @Autowired
     private UserService userService;
 
@@ -46,25 +47,26 @@ public class UserController{
     @Autowired
     private UserDao userDao;
 
-    @RequestMapping(value="/registration", method = RequestMethod.GET)
-    public String register(Model model){
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String register(Model model) {
         model.addAttribute("form", new Form());
         model.addAttribute("userForm", new Fiatskovich.modelFiatskovich.User());
         return "/registration";
     }
 
-    @RequestMapping(value="/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm")Fiatskovich.modelFiatskovich.User userForm,
-                               BindingResult bindingResult, Model model){
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String registration(@ModelAttribute("userForm") Fiatskovich.modelFiatskovich.User userForm,
+                               BindingResult bindingResult, Model model) {
         model.addAttribute("form", new Form());
         userValidator.validate(userForm, bindingResult);
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "/registration";
         }
-        userForm.getMedals().add(medalService.findMedalById(1));
+        //  userForm.setMedals(new LinkedHashSet<>());
+        //   userForm.getMedals().add(medalService.findMedalById(1));
         userService.save(userForm);
         securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
-        return "redirect:/welcome";
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -93,7 +95,7 @@ public class UserController{
 
 
     @RequestMapping(value = "/user/userpage")
-    public String userpage(Model model){
+    public String userpage(Model model) {
         model.addAttribute("form", new Form());
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("categories", categoryService.getAllCategoriesViewModelForSubscribe(user.getUsername()));
@@ -101,15 +103,15 @@ public class UserController{
         return "/user/userpage";
     }
 
-    @RequestMapping(value="/user/buy", method = RequestMethod.GET)
-    public String buy(Model model){
+    @RequestMapping(value = "/user/buy", method = RequestMethod.GET)
+    public String buy(Model model) {
         model.addAttribute("form", new Form());
         model.addAttribute("report", new Report());
         return "/user/buy";
     }
 
     @RequestMapping(value = "/user/buyall", method = RequestMethod.POST)
-    public String buyAll(@ModelAttribute("report")Report report, HttpServletRequest req){
+    public String buyAll(@ModelAttribute("report") Report report, HttpServletRequest req) {
         report.setBuyDate(new Date());
         report.setPrice(Utils.getCartInSession(req).getAmountTotal());
         userService.buyProducts(req);
@@ -118,7 +120,7 @@ public class UserController{
     }
 
     @RequestMapping(value = "/user/subscribe/{id}")
-    public String subscribe(Model model, @PathVariable("id")int id){
+    public String subscribe(Model model, @PathVariable("id") int id) {
         model.addAttribute("form", new Form());
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         userService.subscribeOnCategory(user.getUsername(), id);
@@ -126,10 +128,10 @@ public class UserController{
     }
 
     @RequestMapping(value = "/user/unsubscribe/{id}")
-    public String unsubscribe(Model model, @PathVariable("id")int id){
+    public String unsubscribe(Model model, @PathVariable("id") int id) {
         model.addAttribute("form", new Form());
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-       userService.unSubscribeOnCategory(user.getUsername(), id);
+        userService.unSubscribeOnCategory(user.getUsername(), id);
         return "redirect:/user/userpage";
     }
 

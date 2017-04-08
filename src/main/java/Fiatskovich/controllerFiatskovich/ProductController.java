@@ -54,7 +54,6 @@ public class ProductController{
 
     @RequestMapping(value="/product/removeAllFromBasket", method = RequestMethod.GET)
     @Transactional
-    @ResponseBody
     public String removeAllFromBasket(Model model, HttpServletRequest req){
         model.addAttribute("form", new Form());
         model.addAttribute("products", productService.getAllProducts());
