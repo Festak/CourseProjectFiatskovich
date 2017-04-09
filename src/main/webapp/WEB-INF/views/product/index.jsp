@@ -28,7 +28,7 @@
             <div class="col-md-9">
                 <div class="content-top1">
                     <c:forEach var="products" items="${products}">
-                        <div class="col-md-4 col-md4" style="margin-right: 5px; margin-bottom: 20px;">
+                        <div class="col-md-4 col-md4" style="margin-bottom: 10px;">
                             <div class="col-md1 simpleCart_shelfItem">
                                 <a href="/product/details/${products.id}">
                                     <img class="img-responsive" src="${products.imageUrl}" style="width: 176px; height: 255px" alt="" />

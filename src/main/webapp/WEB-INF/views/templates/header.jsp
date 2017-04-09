@@ -26,7 +26,6 @@
                 <p>Консультант</p>
             </div>
             <div class="col-sm-2 search animated wow fadeInRight" data-wow-delay=".5s">
-                <a class="play-icon popup-with-zoom-anim"><i class="glyphicon glyphicon-search"> </i> </a>
                 <form:form style="float: right"
                            method="get" action="/indexsearch" commandName="form">
                     <form:input path="name" name="query" class="form-control col-md-4" placeholder="Find"/>

@@ -4,11 +4,14 @@ import Fiatskovich.helpers.Form;
 import Fiatskovich.serviceFiatskovich.ProductService;
 import Fiatskovich.serviceFiatskovich.ReportService;
 import Fiatskovich.serviceFiatskovich.UserService;
+import Fiatskovich.validatorFiatskovich.ProductValidator;
+import Fiatskovich.validatorFiatskovich.ReportValidator;
 import Fiatskovich.viewmodelFiatskovich.ProductViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +34,8 @@ public class AdminController {
     @Autowired
     private ReportService reportService;
 
+    @Autowired
+    private ProductValidator productValidator;
 
     @RequestMapping(value = "/admin/index")
     @Transactional
@@ -50,9 +55,16 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/saveProduct", method = RequestMethod.POST)
     public String saveProduct(@ModelAttribute("productForm") ProductViewModel product,
-                              Model model) {
-        productService.addProductViewModelToDataBase(product);
+                              Model model, BindingResult bindingResult) {
+
         model.addAttribute("form", new Form());
+        productValidator.validate(product, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "/admin/addProduct";
+        }
+
+        productService.addProductViewModelToDataBase(product);
         return "redirect:/admin/index";
     }
 
@@ -66,16 +78,23 @@ public class AdminController {
         return "redirect:/admin/index";
     }
 
-    @RequestMapping(value = "/admin/edit/{id}")
+    @RequestMapping(value = "/admin/edit/{id}", method = RequestMethod.GET)
     public String editProduct(@PathVariable("id") long id, Model model) {
         model.addAttribute("form", new Form());
+
         model.addAttribute("product", productService.findProductById(id));
         return "/admin/edit";
     }
 
     @RequestMapping(value = "/admin/editproduct", method = RequestMethod.POST)
-    public String editProductAndToIndex(@ModelAttribute("product") ProductViewModel product) {
+    public String editProductAndToIndex(@ModelAttribute("product") ProductViewModel product, BindingResult bindingResult) {
         //    product.setName(new String(product.getName().getBytes(), StandardCharsets.ISO_8859_1));
+
+        productValidator.validate(product, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "/admin/editproduct";
+        }
         productService.editProduct(product);
         return "redirect:/admin/index";
     }
@@ -83,6 +102,8 @@ public class AdminController {
     @RequestMapping(value = "/admin/report", method = RequestMethod.GET)
     public String report(Model model) {
         model.addAttribute("form", new Form());
+
+
         model.addAttribute("reports", reportService.getAllReports());
         return "/admin/report";
     }

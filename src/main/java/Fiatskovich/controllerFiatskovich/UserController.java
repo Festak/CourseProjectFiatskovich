@@ -1,25 +1,27 @@
 package Fiatskovich.controllerFiatskovich;
 
 import Fiatskovich.cartFiatskovich.Utils;
-import Fiatskovich.daoFiatskovich.UserDao;
 import Fiatskovich.helpers.Form;
 import Fiatskovich.modelFiatskovich.Report;
-
-import Fiatskovich.serviceFiatskovich.*;
+import Fiatskovich.serviceFiatskovich.CategoryService;
+import Fiatskovich.serviceFiatskovich.ReportService;
+import Fiatskovich.serviceFiatskovich.SecurityService;
+import Fiatskovich.serviceFiatskovich.UserService;
+import Fiatskovich.validatorFiatskovich.ReportValidator;
 import Fiatskovich.validatorFiatskovich.UserValidator;
-import Fiatskovich.viewmodelFiatskovich.ProductViewModel;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.LinkedHashSet;
 
 /**
  * Created by Евгений on 17.02.2017.
@@ -42,10 +44,8 @@ public class UserController {
     private ReportService reportService;
 
     @Autowired
-    private MedalService medalService;
+    private ReportValidator reportValidator;
 
-    @Autowired
-    private UserDao userDao;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String register(Model model) {
@@ -98,7 +98,7 @@ public class UserController {
     public String userpage(Model model) {
         model.addAttribute("form", new Form());
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("categories", categoryService.getAllCategoriesViewModelForSubscribe(user.getUsername()));
+        model.addAttribute("categories", categoryService.getAllCategoriesViewModel());
         model.addAttribute("subscribed", categoryService.getUserCategoriesViewModel(user.getUsername()));
         return "/user/userpage";
     }
@@ -111,7 +111,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/buyall", method = RequestMethod.POST)
-    public String buyAll(@ModelAttribute("report") Report report, HttpServletRequest req) {
+    public String buyAll(@ModelAttribute("report") Report report, HttpServletRequest req, Model model, BindingResult result) {
+        model.addAttribute("form", new Form());
+
+        reportValidator.validate(report, result);
+
+        if (result.hasErrors()) {
+            return "/user/buy";
+        }
+
         report.setBuyDate(new Date());
         report.setPrice(Utils.getCartInSession(req).getAmountTotal());
         userService.buyProducts(req);

@@ -37,21 +37,23 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional
     public Set<CategoryViewModel> getFiveCategoriesViewModel() {
-        Set<Category> set = new LinkedHashSet<Category>(categoryDao.findAll().subList(0,5));
+        Set<Category> set = new LinkedHashSet<Category>(categoryDao.findAll().subList(0, 5));
         return categoryToCategoryViewModelCollection(set);
     }
 
     @Transactional
     @Override
-    public Set<CategoryViewModel> getAllCategoriesViewModelForSubscribe(String username)
-    {
-User user = userDao.findByUsername(username);
+    public Set<CategoryViewModel> getAllCategoriesViewModelForSubscribe(String username) {
+        User user = userDao.findByUsername(username);
         Set<Category> nosubscribes = new LinkedHashSet<Category>();
         Set<Category> userCategories = user.getCategories();
         Set<Category> allCategories = new LinkedHashSet<Category>(categoryDao.findAll());
-        for(Category userC: userCategories){
-            for(Category allC: allCategories){
-                if(!userC.equals(allC.getName())){
+
+        if(user.getCategories().size()==0) nosubscribes = allCategories;
+
+        for (Category userC : userCategories) {
+            for (Category allC : allCategories) {
+                if (!userC.getName().equals(allC.getName())) {
                     nosubscribes.add(allC);
                 }
             }
@@ -61,29 +63,27 @@ User user = userDao.findByUsername(username);
 
     @Transactional
     @Override
-    public Set<CategoryViewModel> getUserCategoriesViewModel(String username){
+    public Set<CategoryViewModel> getUserCategoriesViewModel(String username) {
         User user = userDao.findByUsername(username);
         Set<Category> userCategories = user.getCategories();
         return categoryToCategoryViewModelCollection(userCategories);
     }
 
 
-
-    private CategoryViewModel categoryToCategoryViewModel(Category category){
+    private CategoryViewModel categoryToCategoryViewModel(Category category) {
         CategoryViewModel model = new CategoryViewModel();
         model.setId(category.getId());
         model.setName(category.getName());
         return model;
     }
 
-    private Set<CategoryViewModel> categoryToCategoryViewModelCollection(Set<Category> categoriesTemp){
+    private Set<CategoryViewModel> categoryToCategoryViewModelCollection(Set<Category> categoriesTemp) {
         Set<CategoryViewModel> viewModels = new LinkedHashSet<CategoryViewModel>();
-        for(Category category: categoriesTemp){
+        for (Category category : categoriesTemp) {
             viewModels.add(categoryToCategoryViewModel(category));
         }
         return viewModels;
     }
-
 
 
 }

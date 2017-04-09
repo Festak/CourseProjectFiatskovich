@@ -176,7 +176,7 @@ public class ProductServiceImpl extends TemplateServiceImpl implements ProductSe
     private Category categoryViewModelToCategory(CategoryViewModel model) {
         Category category = new Category();
         category.setName(model.getName());
-        sendEmail();
+       // sendEmail();
         return category;
     }
 

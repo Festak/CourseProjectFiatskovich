@@ -8,6 +8,7 @@ import Fiatskovich.modelFiatskovich.Report;
 import Fiatskovich.modelFiatskovich.User;
 import Fiatskovich.serviceFiatskovich.CategoryService;
 import Fiatskovich.serviceFiatskovich.ProductService;
+import Fiatskovich.validatorFiatskovich.ProductValidator;
 import Fiatskovich.viewmodelFiatskovich.ProductViewModel;
 import org.apache.taglibs.standard.tag.common.core.Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class ProductController{
 
     @Autowired
     private ProductService productService;
+
 
     @RequestMapping( value = {"/product/details/{id}"}, method = RequestMethod.GET)
     @Transactional
@@ -73,9 +75,6 @@ public class ProductController{
 
     @RequestMapping(value="/product/setfiverating/{id}", method = RequestMethod.GET)
     public String setfiverating(@PathVariable( value = "id") long id,Model model){
-        // model.addAttribute("form", new Form());
-        // model.addAttribute("products", productService.getAllProducts());
-        // model.addAttribute("categories", categoryService.getAllCategoriesViewModel());
         productService.setRatingToProduct(id, 5);
         model.addAttribute("form", new Form());
         ProductViewModel product = productService.findProductById(id);
@@ -87,9 +86,6 @@ public class ProductController{
 
     @RequestMapping(value="/product/setfourrating/{id}", method = RequestMethod.GET)
     public String setfourrating(@PathVariable( value = "id") long id,Model model){
-        // model.addAttribute("form", new Form());
-        // model.addAttribute("products", productService.getAllProducts());
-        // model.addAttribute("categories", categoryService.getAllCategoriesViewModel());
         productService.setRatingToProduct(id, 4);
         model.addAttribute("form", new Form());
         ProductViewModel product = productService.findProductById(id);
@@ -101,9 +97,6 @@ public class ProductController{
 
     @RequestMapping(value="/product/setthreerating/{id}", method = RequestMethod.GET)
     public String setthreerating(@PathVariable( value = "id") long id,Model model){
-        // model.addAttribute("form", new Form());
-        // model.addAttribute("products", productService.getAllProducts());
-        // model.addAttribute("categories", categoryService.getAllCategoriesViewModel());
         productService.setRatingToProduct(id, 3);
         model.addAttribute("form", new Form());
         ProductViewModel product = productService.findProductById(id);
@@ -115,9 +108,6 @@ public class ProductController{
 
     @RequestMapping(value="/product/settworating/{id}", method = RequestMethod.GET)
     public String settworating(@PathVariable( value = "id") long id,Model model){
-        // model.addAttribute("form", new Form());
-        // model.addAttribute("products", productService.getAllProducts());
-        // model.addAttribute("categories", categoryService.getAllCategoriesViewModel());
         productService.setRatingToProduct(id, 2);
         model.addAttribute("form", new Form());
         ProductViewModel product = productService.findProductById(id);
@@ -129,9 +119,6 @@ public class ProductController{
 
     @RequestMapping(value="/product/setonerating/{id}", method = RequestMethod.GET)
     public String setonerating(@PathVariable( value = "id") long id,Model model){
-        // model.addAttribute("form", new Form());
-        // model.addAttribute("products", productService.getAllProducts());
-        // model.addAttribute("categories", categoryService.getAllCategoriesViewModel());
         productService.setRatingToProduct(id, 1);
         model.addAttribute("form", new Form());
         ProductViewModel product = productService.findProductById(id);
