@@ -102,10 +102,17 @@ public class AdminController {
     @RequestMapping(value = "/admin/report", method = RequestMethod.GET)
     public String report(Model model) {
         model.addAttribute("form", new Form());
-
-
         model.addAttribute("reports", reportService.getAllReports());
         return "/admin/report";
+    }
+
+    @RequestMapping(value = "/admin/copyProduct", method = RequestMethod.POST)
+    public String makePrototype(@ModelAttribute("product") ProductViewModel product, Model model){
+        model.addAttribute("form", new Form());
+        ProductViewModel productViewModel = (ProductViewModel) product.makePrototype();
+        productViewModel.setMemory(0);
+        productService.addProductViewModelToDataBase(productViewModel);
+        return "redirect:/admin/index";
     }
 
 }

@@ -28,7 +28,7 @@
             <div class="col-sm-2 search animated wow fadeInRight" data-wow-delay=".5s">
                 <form:form style="float: right"
                            method="get" action="/indexsearch" commandName="form">
-                    <form:input path="name" name="query" class="form-control col-md-4" placeholder="Find"/>
+                    <form:input path="name" name="query" class="form-control col-md-4" placeholder="Поиск товара"/>
                 </form:form>
             </div>
             <div class="clearfix"> </div>

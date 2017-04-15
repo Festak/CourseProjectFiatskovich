@@ -7,7 +7,7 @@ import java.util.*;
  * Created by Евгений on 19.02.2017.
  */
 
-public class ProductViewModel implements Serializable {
+public class ProductViewModel implements Serializable, Prototype {
 
 
     private Long id;
@@ -155,5 +155,11 @@ public class ProductViewModel implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public Object makePrototype() {
+        ProductViewModel productViewModel = new ProductViewModel(id, name, weight, temperature, memory, price, imageUrl);
+        return productViewModel;
     }
 }
